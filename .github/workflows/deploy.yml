@@ -1,4 +1,4 @@
-name: Deploy to Cafe24 (silbo.kr)
+name: Deploy to Cafe24 (silbo.kr via SFTP)
 
 on:
   push:
@@ -13,17 +13,20 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: FTP Deploy to Cafe24
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Deploy via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: "ftp"
-          port: 21
-          # 로컬: D:\field\www 아래 내용만 업로드
-          local-dir: "www/"
-          # 원격: 실제 웹 루트 = /field0327/www/
-          server-dir: "/field0327/www/"
-          dangerous-clean-slate: false
-          security: "loose"
+          host: ${{ secrets.SFTP_HOST }}
+          port: ${{ secrets.SFTP_PORT }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+
+          # 로컬: D:\field\www 폴더
+          local_path: "www/*"
+
+          # 원격: Xftp에서 보는 /field0327/www 바로 여기에 업로드
+          remote_path: "/field0327/www/"
+
+          # 파일 권한 동기화 옵션들
+          delete_remote_files: false
+          sftp_only: true
