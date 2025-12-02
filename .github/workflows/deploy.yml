@@ -21,8 +21,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           protocol: ftp
-          local-dir: ./www/          # ← 슬래시 추가
-          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
+          local-dir: ./www/              # 로컬 폴더 (슬래시 O)
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}  # 값은 /field0327/www/
           log-level: standard
-
-
