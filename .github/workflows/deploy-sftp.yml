@@ -1,0 +1,26 @@
+name: Deploy to Cafe24 (SFTP)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Deploy via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          server: ${{ secrets.SFTP_HOST }}        # silbo.kr
+          port: ${{ secrets.SFTP_PORT }}          # 22
+          username: ${{ secrets.SFTP_USERNAME }}  # field0327
+          password: ${{ secrets.SFTP_PASSWORD }}  # 비밀번호
+          sftp_only: true
+          local_path: "www/*"                    # 로컬 www 폴더 내용
+          remote_path: "/field0327/www/"         # 서버 www 폴더
+          delete_remote_files: false
