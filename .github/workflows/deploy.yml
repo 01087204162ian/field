@@ -1,4 +1,4 @@
-name: Deploy to Cafe24 (SFTP)
+name: Deploy to Cafe24 (FTP)
 
 on:
   push:
@@ -6,21 +6,22 @@ on:
       - main
 
 jobs:
-  deploy:
+  ftp-deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
 
-      - name: Deploy via SFTP
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.3
         with:
-          server: field0327.cafe24.com   # 카페24 FTP 서버 주소
-          port: 22
-          username: your_ftp_id        # 카페24 FTP ID
-          password: ${{ secrets.SFTP_PASSWORD }}
-          sftp_only: true
-          local_path: "www/*"
-          remote_path: "/field0327/www/"
-          delete_remote_files: false
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          protocol: ftp
+          local-dir: ./www
+          server-dir: /field0327/www
+          log-level: standard
+
