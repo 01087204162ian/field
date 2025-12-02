@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
+<title>FPDF</title>
+<link type="text/css" rel="stylesheet" href="fpdf.css">
+</head>
+<body>
+<h1>FPDF</h1>
+<code>FPDF([<b>string</b> orientation [, <b>string</b> unit [, <b>mixed</b> format]]])</code>
+<h2>설명</h2>
+클래스 생성자. 모든 메소드에서 사용될 용지 크기, 용지 방향, 측정단위 등을
+정의할 수 있습니다(글꼴 크기는 제외).
+<h2>파라미터</h2>
+<dl class="param">
+<dt><code>orientation</code></dt>
+<dd>
+기본 용지 방향. 가능한 값은 아래와 같습니다(대소문자 구분안함):
+<UL>
+<LI><TT>P</TT> or <TT>Portrait</TT> (세로로 길게)
+<LI><TT>L</TT> or <TT>Landscape</TT> (가로로 길게)
+</UL>
+기본값은 <TT>P</TT> 입니다.
+</dd>
+<dt><code>unit</code></dt>
+<dd>
+사용자 측정 단위. 가능한 값은 아래와 같습니다:
+<UL>
+<LI><TT>pt</TT>: 포인트
+<LI><TT>mm</TT>: 밀리미터
+<LI><TT>cm</TT>: 센티미터
+<LI><TT>in</TT>: 인치
+</UL>
+포인트는 1/72 인치와 같고, 0.35 mm쯤 됩니다(1인치는 2.54 cm). 포인트는 글자단위에서
+매우 일반적인 단위입니다; 글꼴 크기는 이 단위로 측정됩니다.
+<BR>
+<BR>
+기본값은 <TT>mm</TT> 입니다.
+</dd>
+<dt><code>format</code></dt>
+<dd>
+용지 크기. 다음 값 중 하나를 선택할 수 있습니다(대소문자 구분안함):
+<UL>
+<LI><TT>A3</TT>
+<LI><TT>A4</TT>
+<LI><TT>A5</TT>
+<LI><TT>Letter</TT>
+<LI><TT>Legal</TT>
+</UL>
+혹은 너비와 높이를 포함하는 2개 원소의 배열로 만드는 것으로 사용자 정의 크기를 지정할 수도
+있습니다(표현단위는 <TT>unit</TT>에서 지정한 것으로 합니다).
+<BR>
+<BR>
+기본값은 <TT>A4</TT> 입니다.
+</dd>
+</dl>
+<h2>예제</h2>
+사용자 정의 100x150 mm 페이지 크기를 지정하는 예제:
+<div class="doc-source">
+<pre><code>$pdf = new FPDF('P', 'mm', array(100,150));</code></pre>
+</div>
+<hr style="margin-top:1.5em">
+<div style="text-align:center"><a href="index.htm">목차</a></div>
+</body>
+</html>

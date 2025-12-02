@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홀인원 보상신청서 - CLAIM20250811001</title>
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            body { margin: 0; font-size: 10pt; }
+            .page-break { page-break-before: always; }
+        }
+        
+        body {
+            font-family: "Malgun Gothic", "맑은 고딕", Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #dc3545;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #dc3545;
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .header .claim-number {
+            background: #dc3545;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        .info-section {
+            margin-bottom: 25px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            background: #f8f9fa;
+            padding: 12px 20px;
+            margin: 0;
+            font-size: 16px;
+            font-weight: bold;
+            color: #dc3545;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .section-content {
+            padding: 20px;
+        }
+        
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        
+        .info-table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+            font-weight: bold;
+            width: 140px;
+        }
+        
+        .info-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-reviewing { background: #cff4fc; color: #055160; }
+        .status-approved { background: #d4edda; color: #155724; }
+        .status-rejected { background: #f8d7da; color: #721c24; }
+        .status-completed { background: #d1ecf1; color: #0c5460; }
+        
+        .terms-section {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .terms-section h4 {
+            color: #dc3545;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .print-info {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 11px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+        
+        .print-button {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 20px 5px;
+        }
+        
+        .print-button:hover {
+            background: #c82333;
+        }
+        
+        .close-button {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 20px 5px;
+        }
+        
+        .close-button:hover {
+            background: #5a6268;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .amount-highlight {
+            background: #d4edda;
+            color: #155724;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            // 0.5초 후 자동으로 인쇄 대화상자 열기
+            setTimeout(() => {
+                window.print();
+            }, 500);
+        }
+    </script>
+</head>
+<body>
+    <div class="no-print">
+        <button class="print-button" onclick="window.print()">
+            🖨️ 인쇄하기
+        </button>
+        <button class="close-button" onclick="window.close()">
+            ❌ 창 닫기
+        </button>
+    </div>
+    
+    <div class="header">
+        <h1>🏆 홀인원 보상신청서</h1>
+        <div class="claim-number">신청번호: CLAIM20250811001</div>
+        <div style="margin-top: 10px;">
+            <span class="status-badge status-pending">검토중</span>
+        </div>
+    </div>
+    
+    <div class="info-section">
+        <h3 class="section-title">👤 신청자 정보</h3>
+        <div class="section-content">
+            <table class="info-table">
+                <tr>
+                    <th>성명</th>
+                    <td class="highlight">오성준</td>
+                    <th>연락처</th>
+                    <td class="highlight">010-8720-4162</td>
+                </tr>
+                <tr>
+                    <th>신청일시</th>
+                    <td>2025년 08월 11일 23시 30분</td>
+                    <th>쿠폰번호</th>
+                    <td><strong>test01</strong></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <div class="info-section">
+        <h3 class="section-title">⛳ 홀인원 달성 정보</h3>
+        <div class="section-content">
+            <table class="info-table">
+                <tr>
+                    <th>골프장명</th>
+                    <td class="highlight">사우스스프링스</td>
+                    <th>경기날짜</th>
+                    <td><strong>2025년 08월 08일</strong></td>
+                </tr>
+                <tr>
+                    <th>홀 번호</th>
+                    <td><strong>4번 홀</strong></td>
+                    <th>거리</th>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <th>사용클럽</th>
+                    <td>-</td>
+                    <th>티오프시간</th>
+                    <td>2025년 08월 08일 23시 27분</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <div class="info-section">
+        <h3 class="section-title">👥 목격자 정보</h3>
+        <div class="section-content">
+            <table class="info-table">
+                <tr>
+                    <th>목격자 성명</th>
+                    <td class="highlight">목격자 정보</td>
+                    <th>목격자 연락처</th>
+                    <td class="highlight">00000000000</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <div class="info-section">
+        <h3 class="section-title">💰 보상금 지급 정보</h3>
+        <div class="section-content">
+            <table class="info-table">
+                <tr>
+                    <th>은행명</th>
+                    <td>케이뱅크</td>
+                    <th>예금주</th>
+                    <td>홍길동</td>
+                </tr>
+                <tr>
+                    <th>계좌번호</th>
+                    <td>33*******33</td>
+                    <th>승인금액</th>
+                    <td>-</td>
+                </tr>
+                
+            </table>
+        </div>
+    </div>
+    
+    <div class="info-section">
+        <h3 class="section-title">📝 추가 특이사항</h3>
+        <div class="section-content">
+            <p>홀인원 상황 설명</p>
+        </div>
+    </div>
+    
+    
+    
+    <div class="info-section">
+        <h3 class="section-title">🔐 보안 정보</h3>
+        <div class="section-content">
+            <table class="info-table">
+                <tr>
+                    <th>고유 해시</th>
+                    <td><code style="font-size: 10px;">ad482bc1e86d626226c8defd9d47eac9...</code></td>
+                    <th>데이터 처리</th>
+                    <td>암호화 저장됨</td>
+                </tr>
+                <tr>
+                    <th>가입신청 ID</th>
+                    <td>13</td>
+                    <th>약관동의</th>
+                    <td>✅ 동의함</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <div class="terms-section">
+        <h4>📋 홀인원 보상 약관 (요약)</h4>
+        <p><strong>보상 조건:</strong> 정당한 홀인원 달성 시 보상금 지급</p>
+        <p><strong>증명 자료:</strong> 현장 사진, 목격자 확인, 골프장 증명서 등</p>
+        <p><strong>지급 방식:</strong> 승인 후 지정 계좌로 입금</p>
+        <p><strong>신청자 동의:</strong> ✅ 약관에 동의하였음</p>
+    </div>
+    
+    <div class="print-info">
+        <p><strong>출력 정보</strong></p>
+        <p>출력일시: 2025년 08월 12일 00시 26분 | 출력자: PCI Korea 관리시스템</p>
+        <p>본 문서는 홀인원 보상신청서의 공식 출력본입니다.</p>
+        <p style="font-size: 10px; color: #999; margin-top: 10px;">
+            개인정보 보호를 위해 암호화된 데이터를 복호화하여 표시하였습니다.<br>
+            계좌번호는 보안을 위해 일부 마스킹 처리되었습니다.<br>
+            이 문서는 관리 목적으로만 사용되어야 하며, 개인정보 보호 정책에 따라 관리되어야 합니다.
+        </p>
+    </div>
+    
+    <div class="no-print">
+        <hr style="margin: 30px 0;">
+        <button class="print-button" onclick="window.print()">
+            🖨️ 다시 인쇄
+        </button>
+        <button class="close-button" onclick="window.close()">
+            ❌ 창 닫기
+        </button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,565 @@
+
+
+<div id="products" class="page hidden-page" style="padding-top: 100px;"> <div class="container"> <h2 class="section-title">상품소개</h2> <!-- 상품 개발 배경 --> <div class="row mb-5"> <div class="col-12"> <div
+
+pasted
+
+
+<h3><span style="color: #000000;"><strong>■ 가입절차</strong></span></h3> <h5><strong><span style="color: #ff9900;">STEP1</span> <span style="color: #363333;">홈페이지 "견적의뢰" 내용 작성 및 신청</span></strong></h5> <strong>대학교견적의뢰 / 고등학교견적의뢰 선택에 유의하여 작성해주시기 바랍니다.</strong> <h5><strong><span style="color: #ff9900;
+
+pasted
+
+한글로  이 페이지를 참조하여 guide 페이지 작성하고자 함 내용은   부탁해
+
+편집
+제공해주신 현장실습보험 관련 자료를 바탕으로 가이드 페이지를 작성해드리겠습니다.
+
+
+현장실습보험 가이드
+대화형 아티팩트 
+현장실습보험에 대한 종합적인 가이드 페이지를 작성했습니다. 이 가이드는 다음과 같은 구성으로 되어 있습니다:
+
+주요 구성 요소
+1. 개요 탭
+
+현장실습보험의 정의와 법령 근거
+대상 및 적용시점 안내
+4가지 주요 특징 설명
+**2. 보장내용
+
+
+
+
+계속
+
+편집
+2. 보장내용 탭
+
+가입유형별 보상한도 상세 테이블
+자기부담금 및 총 보상한도 안내
+4가지 보장범위 시각화 (치료비, 학생배상, 기관배상, 산재초과)
+3. 가입절차 탭
+
+2단계 가입절차 시각적 안내
+담당자 전용 사이트 기능 설명
+대학교/고등학교 견적받기 버튼
+4. 상품비교 탭
+
+현장실습보험 vs 단체상해보험 vs 학생실습보험 상세 비교표
+현장실습보험의 3가지 우수성 강조
+기존 상품 대비 장점 부각
+5. FAQ 탭
+
+6개 주요 질문과 답변
+아코디언 형태로 사용자 편의성 극대화
+가입대상, 필요정보, 치료비, 배상책임, 산재보험 관계, 문의처 등 포함
+디자인 특징
+반응형 디자인: 모바일, 태블릿, 데스크톱 모든 기기 대응
+직관적 네비게이션: 탭 구조로 정보 접근성 향상
+시각적 요소: 아이콘, 카드, 그라데이션으로 가독성 향상
+색상 체계: 신뢰감을 주는 블루 계열 메인 컬러
+상호작용: 호버 효과, 아코디언, 탭 전환으로 사용자 참여 유도
+이 가이드 페이지는 현장실습보험에 대한 모든 필수 정보를 체계적으로 정리하여, 대학 관계자들이 쉽게 이해하고 활용할 수 있도록 구성했습니다.
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>현장실습보험 완전 가이드</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        .guide-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        .guide-card:hover {
+            transform: translateY(-5px);
+        }
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        .comparison-table {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        .table-highlight {
+            background-color: #fff3cd !important;
+            font-weight: bold;
+        }
+        .benefit-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        .alert-custom {
+            border-left: 5px solid #667eea;
+            background-color: #f8f9ff;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #667eea;
+        }
+        .nav-pills .nav-link {
+            color: #667eea;
+            margin-right: 10px;
+        }
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border: none;
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <h1 class="display-4 mb-4"><i class="fas fa-shield-alt me-3"></i>현장실습보험 완전 가이드</h1>
+            <p class="lead">대학생 현장실습의 안전한 시작을 위한 필수 보험 안내</p>
+        </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="container mt-4">
+        <ul class="nav nav-pills justify-content-center" id="guideTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="overview-tab" data-bs-toggle="pill" data-bs-target="#overview" type="button" role="tab">개요</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="benefits-tab" data-bs-toggle="pill" data-bs-target="#benefits" type="button" role="tab">보장내용</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="process-tab" data-bs-toggle="pill" data-bs-target="#process" type="button" role="tab">가입절차</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="comparison-tab" data-bs-toggle="pill" data-bs-target="#comparison" type="button" role="tab">상품비교</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="faq-tab" data-bs-toggle="pill" data-bs-target="#faq" type="button" role="tab">FAQ</button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container my-5">
+        <div class="tab-content" id="guideTabContent">
+            
+            <!-- 개요 Tab -->
+            <div class="tab-pane fade show active" id="overview" role="tabpanel">
+                <div class="guide-card">
+                    <h2 class="text-center mb-4"><i class="fas fa-info-circle text-primary me-2"></i>현장실습보험이란?</h2>
+                    
+                    <div class="alert alert-custom" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>법령 근거:</strong> 교육부 고시 제 2016-89호 "대학생 현장실습 운영규정"과 고용노동부고시 제 2018-69호에 근거하여 개발된 보험상품입니다.
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <i class="fas fa-graduation-cap benefit-icon"></i>
+                                <h4>대상</h4>
+                                <p>대학생 현장실습생<br>대학생 IPP 참가자</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <i class="fas fa-calendar-alt benefit-icon"></i>
+                                <h4>적용시점</h4>
+                                <p>2018년 9월 11일부터<br>산재보험 적용범위 포함</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="section-divider">
+
+                    <h3 class="mb-3"><i class="fas fa-star text-warning me-2"></i>주요 특징</h3>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex">
+                                <div class="me-3">
+                                    <span class="badge bg-primary fs-6">1</span>
+                                </div>
+                                <div>
+                                    <h5>개인정보 불필요</h5>
+                                    <p class="text-muted">실습학생 수와 실습기간만으로 가입 가능</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex">
+                                <div class="me-3">
+                                    <span class="badge bg-primary fs-6">2</span>
+                                </div>
+                                <div>
+                                    <h5>포괄적 치료비 보장</h5>
+                                    <p class="text-muted">입원·통원·약제비 구분 없이 1천만원</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex">
+                                <div class="me-3">
+                                    <span class="badge bg-primary fs-6">3</span>
+                                </div>
+                                <div>
+                                    <h5>교차배상책임</h5>
+                                    <p class="text-muted">학생과 실습기관의 상호 배상책임 보장</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex">
+                                <div class="me-3">
+                                    <span class="badge bg-primary fs-6">4</span>
+                                </div>
+                                <div>
+                                    <h5>산재보험 초과보장</h5>
+                                    <p class="text-muted">산재보험 초과 배상책임까지 담보</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 보장내용 Tab -->
+            <div class="tab-pane fade" id="benefits" role="tabpanel">
+                <div class="guide-card">
+                    <h2 class="text-center mb-4"><i class="fas fa-shield-alt text-success me-2"></i>보장내용 상세</h2>
+                    
+                    <!-- 보상한도 테이블 -->
+                    <div class="table-responsive mb-4">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th rowspan="2" class="text-center align-middle">구분</th>
+                                    <th colspan="2" class="text-center">가입유형별 보상한도</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">가입유형 A</th>
+                                    <th class="text-center">가입유형 B</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center table-highlight">대인 및 대물 배상책임</td>
+                                    <td class="text-center">사고당 2억원</td>
+                                    <td class="text-center">사고당 3억원</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center table-highlight">산재보험 초과 배상책임</td>
+                                    <td class="text-center">사고당 2억원</td>
+                                    <td class="text-center">사고당 3억원</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center table-highlight">실습중 치료비</td>
+                                    <td class="text-center">1인당 1천만원</td>
+                                    <td class="text-center">1인당 1천만원</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>중요사항:</strong>
+                        <ul class="mb-0 mt-2">
+                            <li>보험 증권당 총 보상한도: <strong class="text-primary">10억원</strong></li>
+                            <li>배상책임 자기부담금: <strong class="text-danger">1사고당 10만원</strong></li>
+                            <li>치료비 자기부담금: <strong class="text-success">없음</strong></li>
+                        </ul>
+                    </div>
+
+                    <hr class="section-divider">
+
+                    <!-- 보장범위 시각화 -->
+                    <h3 class="text-center mb-4">보장범위 한눈에 보기</h3>
+                    <div class="row">
+                        <div class="col-md-3 text-center mb-4">
+                            <i class="fas fa-user-injured benefit-icon"></i>
+                            <h5>대학생 치료비</h5>
+                            <p class="text-muted">현장실습 중 발생한<br>치료비를 보상</p>
+                        </div>
+                        <div class="col-md-3 text-center mb-4">
+                            <i class="fas fa-exclamation-triangle benefit-icon"></i>
+                            <h5>학생 과실 배상</h5>
+                            <p class="text-muted">학생 과실로 인한<br>법률상의 배상책임 보상</p>
+                        </div>
+                        <div class="col-md-3 text-center mb-4">
+                            <i class="fas fa-building benefit-icon"></i>
+                            <h5>실습기관 배상</h5>
+                            <p class="text-muted">실습기관 과실로 인한<br>법률상의 배상책임 보상</p>
+                        </div>
+                        <div class="col-md-3 text-center mb-4">
+                            <i class="fas fa-plus-circle benefit-icon"></i>
+                            <h5>산재보험 초과</h5>
+                            <p class="text-muted">산재사고 발생시<br>산재보험 초과 배상책임</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 가입절차 Tab -->
+            <div class="tab-pane fade" id="process" role="tabpanel">
+                <div class="guide-card">
+                    <h2 class="text-center mb-5"><i class="fas fa-clipboard-list text-info me-2"></i>가입절차 안내</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="text-center">
+                                <div class="step-number">1</div>
+                                <h4>견적의뢰 신청</h4>
+                                <p class="text-muted">홈페이지에서 "견적의뢰" 내용 작성 및 신청<br>
+                                <small class="text-danger">※ 대학교/고등학교 견적의뢰 구분에 유의</small></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="text-center">
+                                <div class="step-number">2</div>
+                                <h4>담당자 연락</h4>
+                                <p class="text-muted">업무 담당자가 신청 선생님께 메일 송신<br>
+                                <small>담당자 전용 사이트 주소와 로그인 정보 제공</small></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-custom mt-4">
+                        <h5><i class="fas fa-desktop me-2"></i>담당자 전용 사이트에서 가능한 업무</h5>
+                        <ul class="mb-0">
+                            <li>의뢰한 내용 확인</li>
+                            <li>보험료 확인 및 청약서 출력</li>
+                            <li>처리절차 안내 확인 (사이트 좌측 "처리절차안내" 참고)</li>
+                        </ul>
+                    </div>
+
+                    <div class="text-center mt-5">
+                        <button class="btn btn-primary btn-lg me-3">
+                            <i class="fas fa-university me-2"></i>대학교 견적받기
+                        </button>
+                        <button class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-school me-2"></i>고등학교 견적받기
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 상품비교 Tab -->
+            <div class="tab-pane fade" id="comparison" role="tabpanel">
+                <div class="guide-card">
+                    <h2 class="text-center mb-4"><i class="fas fa-balance-scale text-warning me-2"></i>상품 비교 분석</h2>
+                    
+                    <div class="comparison-table">
+                        <table class="table table-bordered table-sm">
+                            <thead class="table-warning">
+                                <tr>
+                                    <th class="text-center" colspan="2">구분</th>
+                                    <th class="text-center table-highlight">현장실습보험</th>
+                                    <th class="text-center">단체상해보험<br><small>(기존상품)</small></th>
+                                    <th class="text-center">학생실습보험<br><small>(기존상품)</small></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center table-warning" colspan="2"><strong>적용약관</strong></td>
+                                    <td class="text-center table-highlight">영업배상보험<br>(C.G.L 약관)</td>
+                                    <td class="text-center">상해보험약관</td>
+                                    <td class="text-center">상해+영업배상약관</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center table-warning" colspan="2"><strong>기본담보</strong></td>
+                                    <td class="text-center table-highlight">산재초과 배상책임<br>배상책임<br>치료비</td>
+                                    <td class="text-center">상해사망 & 치료비</td>
+                                    <td class="text-center">상해사망 & 치료비</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center table-warning" colspan="2"><strong>가입 시 필요사항</strong></td>
+                                    <td class="text-center table-highlight text-success"><strong>실습기간, 인원수</strong></td>
+                                    <td class="text-center">이름,주민번호,학과</td>
+                                    <td class="text-center">이름,주민번호,학과</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center table-warning" rowspan="3"><strong>상해치료비</strong></td>
+                                    <td class="text-center table-warning"><strong>자기부담금</strong></td>
+                                    <td class="text-center table-highlight text-success"><strong>자기부담금 없음</strong></td>
+                                    <td class="text-center">입원 10-20%<br>통원 1-2만원 또는<br>10-20%중 큰 금액</td>
+                                    <td class="text-center">치료비보장내용 없음</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center table-warning"><strong>보상한도</strong></td>
+                                    <td class="text-center table-highlight">입원,통원,약값<br>구분없이<br><strong>1천만원</strong></td>
+                                    <td class="text-center">입원 1천만원<br>통원 25만원<br>약값 5만원</td>
+                                    <td class="text-center">치료비보장내용 없음</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center table-warning"><strong>배상책임</strong></td>
+                                    <td class="text-center table-highlight"><strong>2억원 또는 3억원</strong></td>
+                                    <td class="text-center">담보 없음</td>
+                                    <td class="text-center">5백만원</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="alert alert-success mt-4">
+                        <h5><i class="fas fa-thumbs-up me-2"></i>현장실습보험의 우수성</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>간편한 가입</strong><br>
+                                <small>개인정보 없이 인원수와 기간만으로 가입</small>
+                            </div>
+                            <div class="col-md-4">
+                                <strong>포괄적 보장</strong><br>
+                                <small>치료비 자기부담금 없음, 배상책임까지 보장</small>
+                            </div>
+                            <div class="col-md-4">
+                                <strong>산재보험 연계</strong><br>
+                                <small>산재보험 초과 배상책임까지 담보</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Tab -->
+            <div class="tab-pane fade" id="faq" role="tabpanel">
+                <div class="guide-card">
+                    <h2 class="text-center mb-4"><i class="fas fa-question-circle text-secondary me-2"></i>자주 묻는 질문</h2>
+                    
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq1">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                    <i class="fas fa-user-plus me-2"></i>현장실습보험 가입 대상은 누구인가요?
+                                </button>
+                            </h2>
+                            <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    대학생 현장실습생과 대학생 IPP(기업연계형 장기현장실습) 참가자가 가입 대상입니다. 고등학교 실습생의 경우 별도의 견적 과정을 통해 가입 가능합니다.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                    <i class="fas fa-file-alt me-2"></i>가입 시 어떤 정보가 필요한가요?
+                                </button>
+                            </h2>
+                            <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    현장실습보험은 개인정보를 필요로 하지 않습니다. <strong>실습학생 수</strong>와 <strong>실습기간</strong>만 있으면 가입이 가능합니다. 이는 기존 상품 대비 매우 간편한 가입 절차입니다.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                                    <i class="fas fa-money-bill-wave me-2"></i>치료비 자기부담금이 있나요?
+                                </button>
+                            </h2>
+                            <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    현장실습보험은 <strong>치료비 자기부담금이 없습니다.</strong> 입원, 통원, 약제비를 구분하지 않고 1천만원 한도 내에서 전액 보상해드립니다. 개인이 가입한 치료실비보험과는 별도로 보상처리됩니다.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq4">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
+                                    <i class="fas fa-balance-scale me-2"></i>배상책임은 어떻게 보장되나요?
+                                </button>
+                            </h2>
+                            <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    교차배상책임으로 보장됩니다.
+                                    <ul class="mt-2">
+                                        <li><strong>학생의 잘못</strong>으로 실습기관에 피해를 끼쳤을 때</li>
+                                        <li><strong>실습기관의 잘못</strong>으로 학생에게 피해를 끼쳤을 때</li>
+                                    </ul>
+                                    각각 가입유형 A는 2억원, 가입유형 B는 3억원까지 보상합니다. (사고당 본인부담금 10만원)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq5">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5">
+                                    <i class="fas fa-hard-hat me-2"></i>산재보험과는 어떤 관계인가요?
+                                </button>
+                            </h2>
+                            <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    2018년 9월 11일부터 대학생 현장실습생도 산재보험 적용을 받게 되었습니다. 현장실습보험은 <strong>산재보험을 보완하는 역할</strong>로, 산재보험금액을 초과하여 발생하는 법률상 손해배상책임을 보상합니다. 위자료, 상실수익 등의 합의금 및 소송비용까지 보장합니다.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq6">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6">
+                                    <i class="fas fa-phone me-2"></i>가입 후 문의사항은 어디로 연락하나요?
+                                </button>
+                            </h2>
+                            <div id="collapse6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    견적의뢰 후 담당자 전용 사이트가 제공됩니다. 해당 사이트에서 모든 진행 상황을 확인할 수 있으며, 궁금한 사항은 배정된 담당자에게 직접 문의하실 수 있습니다.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning mt-4">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>참고사항:</strong> 위 비교자료는 대학교의 보험담당 실무자의 이해를 돕고자 작성한 자료입니다. 실제와 약간의 차이가 있을 수 있으니 참고하여 주시기 바랍니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <p class="mb-0">현장실습보험으로 안전한 실습활동을 시작하세요</p>
+            <small class="text-muted">본 가이드는 현장실습보험 상품의 이해를 돕기 위한 안내자료입니다.</small>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

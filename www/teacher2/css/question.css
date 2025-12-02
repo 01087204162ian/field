@@ -1,0 +1,1803 @@
+/* ========================================
+   질문서 카드 관리 시스템 CSS v6 - 완전판
+   ======================================== */
+
+/* ========== 기본 레이아웃 ========== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ========== 헤더 영역 ========== */
+.page-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.page-title {
+    color: #2d3748;
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.refresh-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.refresh-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+}
+
+/* ========== 검색 영역 ========== */
+.search-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.search-form {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 1rem;
+    align-items: end;
+}
+
+.search-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.search-group label {
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 0.9rem;
+}
+
+.search-input {
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.search-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    outline: none;
+}
+
+.search-btn, .reset-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.search-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.reset-btn {
+    background: #e2e8f0;
+    color: #4a5568;
+}
+
+.search-btn:hover, .reset-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== 질문서 카드 컨테이너 ========== */
+.questions-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* 카드 그리드 - 1열 레이아웃 */
+.questions-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* ========== 개별 질문서 카드 ========== */
+.question-card {
+    background: white;
+    border: 1px solid #e1e5e9;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.question-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.question-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.question-card:hover::before {
+    opacity: 1;
+}
+
+/* ========== 카드 헤더 ========== */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1.5rem 0;
+    margin-bottom: 1rem;
+}
+
+.card-number {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 0.375rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.status-badge {
+    padding: 0.375rem 0.875rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.status-pending {
+    background: #fef3c7;
+    color: #d97706;
+    border: 1px solid #fbbf24;
+}
+
+.status-active {
+    background: #d1fae5;
+    color: #059669;
+    border: 1px solid #34d399;
+}
+
+.status-completed {
+    background: #dbeafe;
+    color: #2563eb;
+    border: 1px solid #60a5fa;
+}
+
+/* ========== 카드 내용 영역 ========== */
+.card-content {
+    padding: 0 1.5rem 1.5rem;
+}
+
+/* 보험기간 전체 너비 */
+.insurance-period-full {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #f0f9ff;
+    border: 1px solid #e0f2fe;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.insurance-period-full .info-label {
+    font-weight: 600;
+    color: #0369a1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.insurance-period-full .info-value {
+    font-weight: 600;
+    color: #0c4a6e;
+}
+
+/* 카드 내부 2열 레이아웃 */
+.card-body-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.card-left-column,
+.card-right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ========== 정보 행 스타일 ========== */
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f1f3f4;
+    font-size: 0.95rem;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 500;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 80px;
+}
+
+.info-value {
+    font-weight: 600;
+    color: #1e293b;
+    text-align: right;
+}
+
+/* 문서 관련 행 */
+.document-row .info-value {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+/* ========== 배지 및 상태 표시 ========== */
+.semester-badge {
+    background: #e0e7ff;
+    color: #3730a3;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.certificate-number {
+    color: #333;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.document-status.available {
+    color: #059669;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.document-status.preparing {
+    color: #d97706;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+/* ========== 업로드 관련 스타일 ========== */
+.document-buttons {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.inline-download-btn {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 11px;
+    min-width: 28px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.inline-download-btn:hover {
+    background: #2563eb;
+    transform: scale(1.05);
+}
+
+.inline-download-btn i {
+    font-size: 10px;
+}
+
+.inline-upload-btn {
+    background: #10b981;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 11px;
+    min-width: 28px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.inline-upload-btn:hover {
+    background: #059669;
+    transform: scale(1.05);
+}
+
+.inline-upload-btn i {
+    font-size: 10px;
+}
+
+/* ========== 업로드 모달 ========== */
+.upload-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.upload-modal.show {
+    opacity: 1;
+}
+
+.upload-modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.upload-modal-content {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90vw;
+    max-height: 90vh;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+}
+
+.upload-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #f9fafb;
+}
+
+.upload-modal-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.upload-modal-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    color: #6b7280;
+    transition: all 0.2s ease;
+}
+
+.upload-modal-close:hover {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+.upload-modal-body {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.upload-description {
+    margin-bottom: 20px;
+}
+
+.upload-description p {
+    color: #6b7280;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.upload-instructions {
+    background: #f0f9ff;
+    border: 1px solid #e0f2fe;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
+.upload-instructions h4 {
+    color: #0369a1;
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.instructions-content {
+    color: #0c4a6e;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.upload-section {
+    margin-bottom: 20px;
+}
+
+/* 파일 드롭 존 */
+.file-drop-zone {
+    border: 2px dashed #d1d5db;
+    border-radius: 8px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #fafafa;
+}
+
+.file-drop-zone:hover,
+.file-drop-zone.drag-over {
+    border-color: #3b82f6;
+    background: #eff6ff;
+}
+
+.drop-zone-content i {
+    font-size: 48px;
+    color: #9ca3af;
+    margin-bottom: 16px;
+}
+
+.drop-zone-content p {
+    color: #4b5563;
+    margin: 0 0 8px 0;
+    font-weight: 500;
+}
+
+.drop-zone-content small {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+/* 선택된 파일 정보 */
+.selected-file {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f0f9ff;
+    border: 1px solid #e0f2fe;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.file-info i {
+    font-size: 24px;
+    color: #3b82f6;
+}
+
+.file-name {
+    font-weight: 600;
+    color: #1f2937;
+    margin-right: 8px;
+}
+
+.file-size {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.remove-file-btn {
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.remove-file-btn:hover {
+    background: #dc2626;
+}
+
+/* 업로드 진행률 */
+.upload-progress {
+    margin-top: 16px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 14px;
+    color: #4b5563;
+    font-weight: 500;
+}
+
+.upload-modal-footer {
+    display: flex;
+    gap: 12px;
+    padding: 20px 24px;
+    border-top: 1px solid #e5e7eb;
+    background-color: #f9fafb;
+    justify-content: center;
+}
+
+.upload-modal-footer .btn {
+    min-width: 100px;
+}
+
+/* ========== 로딩 상태 ========== */
+.loading-container {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 4px solid #e2e8f0;
+    border-radius: 50%;
+    border-top-color: #667eea;
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ========== 데이터 없음 메시지 ========== */
+.no-data {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #64748b;
+}
+
+.no-data i {
+    font-size: 4rem;
+    color: #cbd5e1;
+    margin-bottom: 1rem;
+}
+
+.no-data h3 {
+    color: #475569;
+    margin-bottom: 0.5rem;
+}
+
+/* ========== 페이지네이션 ========== */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.pagination-info {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.pagination-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.page-btn {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #e2e8f0;
+    background: white;
+    color: #475569;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.page-btn:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.page-btn.active {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-color: #667eea;
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ========== 이미지 관련 스타일 ========== */
+.images-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 12px;
+    margin-top: 8px;
+}
+
+.images-container {
+    width: 100%;
+}
+
+.image-group {
+    margin-bottom: 12px;
+}
+
+.image-group:last-child {
+    margin-bottom: 0;
+}
+
+.image-group-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 6px;
+    padding: 4px 8px;
+    background-color: #f9fafb;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.image-thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.image-item {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border: 2px solid #e5e7eb;
+}
+
+.image-item:hover {
+    transform: scale(1.05);
+    border-color: #3b82f6;
+}
+
+.image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.image-item:hover .image-overlay {
+    opacity: 1;
+}
+
+.image-overlay i {
+    color: white;
+    font-size: 16px;
+}
+
+/* ========== 이미지 모달 ========== */
+.image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-modal.show {
+    opacity: 1;
+}
+
+.image-modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+}
+
+.image-modal-content {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+}
+
+.image-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #f9fafb;
+}
+
+.image-modal-title {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 16px;
+}
+
+.image-modal-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    color: #6b7280;
+    transition: all 0.2s ease;
+}
+
+.image-modal-close:hover {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+.image-modal-body {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.image-modal-footer {
+    display: flex;
+    gap: 12px;
+    padding: 16px 20px;
+    border-top: 1px solid #e5e7eb;
+    background-color: #f9fafb;
+    justify-content: flex-end;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+}
+
+.btn-secondary {
+    background-color: #6b7280;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #4b5563;
+}
+
+/* ========== 유틸리티 클래스 ========== */
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.highlight {
+    background: #fef3c7;
+    padding: 0.125rem 0.25rem;
+    border-radius: 4px;
+}
+
+.tooltip {
+    position: relative;
+    cursor: help;
+}
+
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2937;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.tooltip:hover::after {
+    opacity: 1;
+}
+
+/* ========================================
+   반응형 디자인
+   ======================================== */
+
+/* 태블릿 (1024px 미만) */
+@media (max-width: 1024px) {
+    .card-body-columns {
+        gap: 16px;
+    }
+    
+    .questions-container {
+        padding: 1.5rem;
+    }
+}
+
+/* 모바일 (768px 미만) */
+@media (max-width: 768px) {
+    .page-header {
+        padding: 1.5rem;
+    }
+
+    .header-content {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-form {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .search-group {
+        margin-bottom: 0.5rem;
+    }
+
+    .questions-grid {
+        gap: 1rem;
+    }
+
+    .question-card {
+        margin-bottom: 12px;
+    }
+
+    .card-header {
+        padding: 1.25rem 1.25rem 0;
+    }
+
+    .card-content {
+        padding: 0 1.25rem 1.25rem;
+    }
+
+    /* 카드 내부를 1열로 변경 */
+    .card-body-columns {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .insurance-period-full {
+        flex-direction: column;
+        gap: 4px;
+        text-align: center;
+        padding: 10px 12px;
+    }
+
+    .pagination-container {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .pagination-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* 이미지 관련 반응형 */
+    .image-item {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .image-thumbnails {
+        gap: 6px;
+    }
+    
+    .image-modal-content {
+        max-width: 95vw;
+        max-height: 95vh;
+    }
+    
+    .image-modal-body {
+        padding: 16px;
+    }
+    
+    .modal-image {
+        max-height: 60vh;
+    }
+    
+    .image-modal-footer {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* 업로드 모달 반응형 */
+    .upload-modal-content {
+        max-width: 95vw;
+        max-height: 95vh;
+    }
+    
+    .upload-modal-header {
+        padding: 16px 20px;
+    }
+    
+    .upload-modal-title {
+        font-size: 16px;
+    }
+    
+    .upload-modal-body {
+        padding: 20px;
+    }
+    
+    .file-drop-zone {
+        padding: 30px 15px;
+    }
+    
+    .drop-zone-content i {
+        font-size: 36px;
+    }
+    
+    .upload-modal-footer {
+        flex-direction: column;
+        padding: 16px 20px;
+        align-items: center;
+    }
+    
+    .upload-modal-footer .btn {
+        width: 100%;
+        max-width: 200px;
+        justify-content: center;
+        min-width: auto;
+    }
+	
+	
+	 /* 프리미엄 골드 날인본 버튼 스타일 */
+        .inline-view-btn.stamped-premium {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            border: none;
+            padding: 3px 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(243, 156, 18, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .inline-view-btn.stamped-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .inline-view-btn.stamped-premium:hover::before {
+            left: 100%;
+        }
+
+        .inline-view-btn.stamped-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+        }
+
+
+.status-pending { color: #6c757d; }      /* 대기 */
+.status-partial { color: #ffc107; }      /* 부분 완료 */
+.status-progress { color: #17a2b8; }     /* 진행 중 */
+.status-ready { color: #28a745; }        /* 준비 완료 */
+.status-active { color: #007bff; }       /* 활성 상태 */
+.status-completed { color: #28a745; }    /* 완료 */
+.status-approved { color: #28a745; }     /* 승인 */
+.status-rejected { color: #dc3545; }     /* 반려 */
+
+/* 기존 .questions-container 스타일을 개별 요소들로 분산 */
+.questions-grid, .loading-container, .no-data, .pagination-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+
+/* 결제 모달 스타일 */
+.payment-modal-content {
+    width: 650px !important;
+    max-width: 95vw;
+}
+
+.payment-intro {
+    background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    border-left: 4px solid #667eea;
+}
+
+.payment-intro p {
+    margin: 0;
+    color: #37474f;
+    font-size: 15px;
+}
+
+.payment-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid #e1e8ed;
+    padding-bottom: 0;
+}
+
+.payment-tab {
+    flex: 1;
+    padding: 14px 20px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    color: #78909c;
+    transition: all 0.3s ease;
+    position: relative;
+    bottom: -2px;
+}
+
+.payment-tab:hover {
+    color: #667eea;
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.payment-tab.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+    background: rgba(102, 126, 234, 0.08);
+}
+
+.payment-content {
+    animation: fadeIn 0.3s ease;
+}
+
+.payment-section {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid #e1e8ed;
+    margin-bottom: 20px;
+}
+
+.payment-section h4 {
+    margin: 0 0 20px 0;
+    color: #1a1a1a;
+    font-size: 17px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-grid {
+    display: grid;
+    gap: 16px;
+}
+
+.info-item label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #37474f;
+    font-size: 14px;
+}
+
+.info-options {
+    display: flex;
+    gap: 16px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #f8fafc;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.radio-label:hover {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.radio-label input[type="radio"] {
+    margin: 0;
+    cursor: pointer;
+}
+
+.radio-label input[type="radio"]:checked + label,
+.radio-label:has(input[type="radio"]:checked) {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+    font-weight: 600;
+}
+
+.card-form {
+    margin-top: 20px;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #37474f;
+    font-size: 14px;
+}
+
+.form-group .required {
+    color: #ef4444;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 6px;
+    color: #78909c;
+    font-size: 12px;
+}
+
+.form-group small.text-danger {
+    color: #ef4444;
+}
+
+.bank-info {
+    margin-top: 20px;
+    animation: slideDown 0.3s ease;
+}
+
+.info-box {
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8f2ff 100%);
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid #667eea;
+}
+
+.info-box p {
+    margin: 12px 0;
+    font-size: 15px;
+    color: #37474f;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-box strong {
+    color: #1a1a1a;
+}
+
+.payment-notice {
+    background: #fff8e1;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #ffa726;
+}
+
+.payment-notice h5 {
+    margin: 0 0 12px 0;
+    color: #e65100;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.payment-notice ul {
+    margin: 0;
+    padding-left: 20px;
+    color: #5d4037;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.qcm-submit-btn {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.qcm-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* ===== 질문서 카드 결제 버튼 스타일 (Bootstrap 충돌 방지) ===== */
+
+/* 카드 헤더 전체 재정의 */
+.questions-grid .question-card .card-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 20px 24px !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border-radius: 16px 16px 0 0 !important;
+    gap: 12px !important;
+    flex-wrap: wrap !important;
+    border-bottom: none !important;
+    margin-bottom: 0 !important;
+    color: white !important;
+}
+
+/* 결제 버튼 스타일 */
+.questions-grid .payment-info-btn {
+    /* 레이아웃 */
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    
+    /* 크기 및 간격 */
+    padding: 10px 20px !important;
+    margin-left: auto !important;
+    white-space: nowrap !important;
+    
+    /* 배경 및 색상 */
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+    color: white !important;
+    
+    /* 테두리 */
+    border: none !important;
+    border-radius: 8px !important;
+    
+    /* 텍스트 */
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.3px !important;
+    
+    /* 효과 */
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+    
+    /* Bootstrap 기본 스타일 제거 */
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    text-transform: none !important;
+}
+
+/* 호버 효과 */
+.questions-grid .payment-info-btn:hover {
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.5) !important;
+    background: linear-gradient(135deg, #059669, #047857) !important;
+}
+
+/* 클릭 효과 */
+.questions-grid .payment-info-btn:active {
+    transform: translateY(0) scale(0.98) !important;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3) !important;
+}
+
+/* 포커스 효과 */
+.questions-grid .payment-info-btn:focus {
+    outline: 2px solid rgba(16, 185, 129, 0.5) !important;
+    outline-offset: 2px !important;
+}
+
+/* 비활성화 상태 */
+.questions-grid .payment-info-btn:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+}
+
+
+/* ===== 단계별 결제 모달 스타일 ===== */
+
+/* ===== 단계별 결제 모달 스타일 ===== */
+
+/* 단계 컨테이너 */
+.payment-step {
+    animation: fadeIn 0.3s ease;
+}
+
+.payment-step.active {
+    display: block;
+}
+
+/* 단계 헤더 */
+.step-header {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.step-header h4 {
+    margin: 0 0 8px 0;
+    color: #1a1a1a;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.step-description {
+    margin: 0;
+    color: #666;
+    font-size: 15px;  /* 조금 더 크게 */
+    line-height: 1.6;
+}
+
+
+/* 결제 방법 선택 카드 */
+.payment-method-selection {
+    display: flex;  /* grid 대신 flex 사용 */
+    justify-content: center;  /* 중앙 정렬 */
+    gap: 24px;
+    margin-top: 24px;
+    flex-wrap: wrap;  /* 모바일에서 줄바꿈 */
+}
+
+.payment-method-card {
+    background: white;
+    border: 3px solid #e1e8ed;
+    border-radius: 16px;
+    padding: 40px 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-height: 200px;
+    width: 280px;  /* 고정 너비 설정 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-method-card:hover {
+    border-color: #667eea;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+}
+
+.method-icon {
+    font-size: 56px;  /* 아이콘 크기 키움 */
+    margin-bottom: 20px;
+}
+
+.method-title {
+    font-size: 20px;  /* 제목 크기 키움 */
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+}
+
+.method-description {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* 카드 종류 선택 */
+.card-type-selection {
+    margin-bottom: 24px;
+}
+
+.card-type-selection h5 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 16px 0;
+}
+
+.card-type-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.card-type-option {
+    cursor: pointer;
+}
+
+.card-type-option input[type="radio"] {
+    display: none;
+}
+
+.option-content {
+    background: #f8fafc;
+    border: 2px solid #e1e8ed;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.card-type-option input[type="radio"]:checked + .option-content {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.08);
+}
+
+.option-content:hover {
+    border-color: #667eea;
+}
+
+.option-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.option-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+}
+
+.option-desc {
+    font-size: 13px;
+    color: #666;
+}
+
+/* 카드 입력 폼 */
+.card-input-form {
+    margin-top: 24px;
+}
+
+/* 은행 선택 */
+.bank-selection h5 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 16px 0;
+}
+
+.bank-select {
+    font-size: 15px;
+    padding: 14px 16px;
+}
+
+/* 계좌 정보 하이라이트 박스 */
+.bank-info-display {
+    margin-top: 24px;
+    animation: slideDown 0.4s ease;
+}
+
+.info-box-highlight {
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8f2ff 100%);
+    border: 3px solid #667eea;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+.info-row-highlight {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dashed #c5d3ea;
+}
+
+.info-row-highlight:last-child {
+    border-bottom: none;
+}
+
+.info-row-highlight.large {
+    padding: 16px 0;
+}
+
+.info-row-highlight.deadline {
+    background: rgba(255, 152, 0, 0.1);
+    padding: 12px;
+    border-radius: 8px;
+    border-bottom: none;
+    margin-top: 8px;
+}
+
+.info-label-bold {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0369a1;
+}
+
+.info-value-bold {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0c4a6e;
+}
+
+.info-value-bold.account-number {
+    font-size: 18px;
+    color: #1e3a8a;
+    letter-spacing: 0.5px;
+}
+
+.info-value-bold.amount {
+    font-size: 20px;
+    color: #dc2626;
+}
+
+/* 계좌번호 복사 버튼 */
+.copy-account-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.copy-account-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .payment-method-selection,
+    .card-type-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .payment-method-card {
+        padding: 24px 20px;
+    }
+    
+    .method-icon {
+        font-size: 40px;
+    }
+    
+    .info-box-highlight {
+        padding: 20px;
+    }
+    
+    .info-value-bold.account-number {
+        font-size: 16px;
+    }
+}
+
+/* 뒤로 버튼 스타일 */
+.qcm-cancel-btn {
+    padding: 12px 24px;
+    background: #f0f0f0;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    min-width: 100px;
+}
+
+.qcm-cancel-btn:hover {
+    background: #e0e0e0;
+    transform: translateY(-1px);
+}

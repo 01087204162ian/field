@@ -1,0 +1,734 @@
+/* 날인본 미리보기 모달 스타일 (모바일 최적화) */
+
+.stamped-preview-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    /* 모바일에서 스크롤 방지 */
+    overflow: hidden;
+}
+
+.stamped-preview-modal .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+}
+
+.stamped-preview-modal .modal-content {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(255, 255, 255, 0.3);
+    max-width: 1200px;
+    max-height: 90vh;
+    width: 95vw;
+    display: flex;
+    flex-direction: column;
+    animation: modalFadeIn 0.3s ease-out;
+    /* 모바일에서 안전한 영역 확보 */
+    margin: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+}
+
+.stamped-preview-modal .modal-content.pdf-modal {
+    max-width: 1400px;
+    width: 98vw;
+    max-height: 95vh;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.stamped-preview-modal .modal-header {
+    padding: 20px 25px 15px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fa;
+    border-radius: 12px 12px 0 0;
+    /* 모바일에서 헤더 고정 */
+    flex-shrink: 0;
+}
+
+.stamped-preview-modal .modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* 모바일에서 텍스트 줄바꿈 방지 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 50px);
+}
+
+.stamped-preview-modal .modal-header h3 i {
+    color: #e74c3c;
+    flex-shrink: 0;
+}
+
+.stamped-preview-modal .modal-close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    /* 모바일에서 터치 영역 확대 */
+    min-width: 40px;
+    min-height: 40px;
+    flex-shrink: 0;
+}
+
+.stamped-preview-modal .modal-close-btn:hover {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.stamped-preview-modal .modal-body {
+    padding: 0;
+    flex: 1;
+    overflow: auto;
+    position: relative;
+    min-height: 300px;
+    /* 모바일에서 스크롤 가능하도록 */
+    -webkit-overflow-scrolling: touch;
+}
+
+.stamped-preview-modal .image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    max-height: none;
+    /* 모바일에서 이미지 컨테이너 유연성 */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.stamped-preview-modal .image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    display: none;
+    object-fit: contain;
+    /* 모바일에서 이미지 터치 제스처 */
+    touch-action: pan-x pan-y zoom;
+}
+
+.stamped-preview-modal .image-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #666;
+}
+
+.stamped-preview-modal .image-loading i {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #3498db;
+}
+
+.stamped-preview-modal .image-loading p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.stamped-preview-modal .image-error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #e74c3c;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    max-width: 90%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.stamped-preview-modal .image-error i {
+    font-size: 48px;
+    margin-bottom: 15px;
+    color: #e74c3c;
+}
+
+.stamped-preview-modal .image-error p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.stamped-preview-modal .image-error small {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    word-break: break-all;
+    max-width: 100%;
+    margin: 10px 0;
+}
+
+.stamped-preview-modal .retry-btn,
+.stamped-preview-modal .debug-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 5px;
+    transition: all 0.2s ease;
+    /* 모바일에서 터치 영역 확대 */
+    min-height: 44px;
+    touch-action: manipulation;
+}
+
+.stamped-preview-modal .retry-btn {
+    background: #3498db;
+    color: white;
+}
+
+.stamped-preview-modal .retry-btn:hover {
+    background: #2980b9;
+}
+
+.stamped-preview-modal .debug-btn {
+    background: #95a5a6;
+    color: white;
+}
+
+.stamped-preview-modal .debug-btn:hover {
+    background: #7f8c8d;
+}
+
+/* PDF 컨테이너 스타일 */
+.stamped-preview-modal .pdf-container {
+    width: 100%;
+    height: 600px;
+    min-height: 400px;
+    position: relative;
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 10px;
+}
+
+.stamped-preview-modal .pdf-container embed {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.stamped-preview-modal .pdf-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+}
+
+.stamped-preview-modal .pdf-message {
+    text-align: center;
+    color: #666;
+    max-width: 90%;
+    padding: 20px;
+}
+
+.stamped-preview-modal .pdf-message i {
+    font-size: 48px;
+    color: #e74c3c;
+    margin-bottom: 20px;
+}
+
+.stamped-preview-modal .pdf-message h4 {
+    margin: 0 0 15px 0;
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+.stamped-preview-modal .pdf-message p {
+    margin: 10px 0;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.stamped-preview-modal .pdf-download-btn {
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    touch-action: manipulation;
+}
+
+.stamped-preview-modal .pdf-download-btn:hover {
+    background: #c0392b;
+    transform: translateY(-1px);
+}
+
+/* 지원하지 않는 파일 형식 스타일 */
+.stamped-preview-modal .unsupported-container {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 10px;
+}
+
+.stamped-preview-modal .unsupported-message {
+    text-align: center;
+    color: #666;
+    max-width: 90%;
+    padding: 20px;
+}
+
+.stamped-preview-modal .unsupported-message i {
+    font-size: 48px;
+    color: #95a5a6;
+    margin-bottom: 20px;
+}
+
+.stamped-preview-modal .unsupported-message h4 {
+    margin: 0 0 15px 0;
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+.stamped-preview-modal .unsupported-message p {
+    margin: 10px 0;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.stamped-preview-modal .unsupported-download-btn {
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: #95a5a6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    touch-action: manipulation;
+}
+
+.stamped-preview-modal .unsupported-download-btn:hover {
+    background: #7f8c8d;
+    transform: translateY(-1px);
+}
+
+.stamped-preview-modal .modal-footer {
+    padding: 20px 25px;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    background: #f8f9fa;
+    border-radius: 0 0 12px 12px;
+    /* 모바일에서 푸터 고정 */
+    flex-shrink: 0;
+}
+
+.stamped-preview-modal .modal-download-btn,
+.stamped-preview-modal .modal-cancel-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* 모바일에서 터치 영역 확대 */
+    min-height: 44px;
+    touch-action: manipulation;
+}
+
+.stamped-preview-modal .modal-download-btn {
+    background: #27ae60;
+    color: white;
+}
+
+.stamped-preview-modal .modal-download-btn:hover {
+    background: #219a52;
+    transform: translateY(-1px);
+}
+
+.stamped-preview-modal .modal-cancel-btn {
+    background: #95a5a6;
+    color: white;
+}
+
+.stamped-preview-modal .modal-cancel-btn:hover {
+    background: #7f8c8d;
+}
+
+/* 데스크톱 대형 화면 */
+@media (min-width: 1200px) {
+    .stamped-preview-modal .modal-content {
+        max-width: 1400px;
+        width: 90vw;
+    }
+    
+    .stamped-preview-modal .modal-content.pdf-modal {
+        max-width: 1600px;
+        width: 95vw;
+    }
+    
+    .stamped-preview-modal .pdf-container {
+        height: 800px;
+    }
+    
+    .stamped-preview-modal .image-container {
+        min-height: 600px;
+        max-height: 80vh;
+    }
+}
+
+/* 태블릿 화면 */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .stamped-preview-modal .modal-content {
+        width: 90vw;
+        max-height: 85vh;
+    }
+    
+    .stamped-preview-modal .pdf-container {
+        height: 550px;
+    }
+    
+    .stamped-preview-modal .image-container {
+        min-height: 400px;
+        padding: 15px;
+    }
+}
+
+/* 모바일 화면 (가장 중요한 부분) */
+@media (max-width: 768px) {
+    .stamped-preview-modal {
+        /* 모바일에서 확실히 표시되도록 */
+        display: flex !important;
+        padding: 10px;
+        align-items: flex-start;
+        padding-top: max(10px, env(safe-area-inset-top));
+    }
+    
+    .stamped-preview-modal.show {
+        display: flex !important;
+    }
+    
+    .stamped-preview-modal .modal-content {
+        width: calc(100vw - 20px);
+        max-width: none;
+        max-height: calc(100vh - 20px);
+        margin: 0;
+        border-radius: 8px;
+        /* 모바일에서 세로 스크롤 허용 */
+        overflow: hidden;
+    }
+    
+    .stamped-preview-modal .modal-content.pdf-modal {
+        width: calc(100vw - 10px);
+        max-height: calc(100vh - 10px);
+    }
+    
+    .stamped-preview-modal .modal-header {
+        padding: 12px 15px 10px;
+        flex-shrink: 0;
+    }
+    
+    .stamped-preview-modal .modal-header h3 {
+        font-size: 15px;
+        max-width: calc(100% - 45px);
+    }
+    
+    .stamped-preview-modal .modal-close-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+    
+    .stamped-preview-modal .modal-body {
+        flex: 1;
+        min-height: 250px;
+        max-height: calc(100vh - 180px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .stamped-preview-modal .image-container {
+        min-height: 250px;
+        padding: 10px;
+        max-height: none;
+    }
+    
+    .stamped-preview-modal .image-container img {
+        width: 100%;
+        height: auto;
+        max-height: calc(100vh - 200px);
+    }
+    
+    .stamped-preview-modal .pdf-container {
+        height: calc(100vh - 200px);
+        min-height: 300px;
+        margin: 5px;
+        border-radius: 4px;
+    }
+    
+    .stamped-preview-modal .pdf-message {
+        padding: 15px;
+    }
+    
+    .stamped-preview-modal .pdf-message i {
+        font-size: 36px;
+    }
+    
+    .stamped-preview-modal .pdf-message h4 {
+        font-size: 16px;
+    }
+    
+    .stamped-preview-modal .pdf-message p {
+        font-size: 13px;
+    }
+    
+    .stamped-preview-modal .unsupported-container {
+        height: 300px;
+        margin: 5px;
+    }
+    
+    .stamped-preview-modal .unsupported-message {
+        padding: 15px;
+    }
+    
+    .stamped-preview-modal .unsupported-message i {
+        font-size: 36px;
+    }
+    
+    .stamped-preview-modal .unsupported-message h4 {
+        font-size: 16px;
+    }
+    
+    .stamped-preview-modal .modal-footer {
+        padding: 12px 15px;
+        flex-direction: column;
+        gap: 10px;
+        flex-shrink: 0;
+    }
+    
+    .stamped-preview-modal .modal-download-btn,
+    .stamped-preview-modal .modal-cancel-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+    
+    .stamped-preview-modal .image-error {
+        max-width: 95%;
+        padding: 15px;
+    }
+    
+    .stamped-preview-modal .image-error i {
+        font-size: 36px;
+    }
+    
+    .stamped-preview-modal .image-error p {
+        font-size: 14px;
+    }
+    
+    .stamped-preview-modal .image-error small {
+        font-size: 11px;
+    }
+    
+    .stamped-preview-modal .retry-btn,
+    .stamped-preview-modal .debug-btn {
+        padding: 12px 16px;
+        font-size: 13px;
+        margin: 3px;
+    }
+}
+
+/* 작은 모바일 화면 */
+@media (max-width: 480px) {
+    .stamped-preview-modal {
+        padding: 5px;
+        padding-top: max(5px, env(safe-area-inset-top));
+    }
+    
+    .stamped-preview-modal .modal-content {
+        width: calc(100vw - 10px);
+        max-height: calc(100vh - 10px);
+        border-radius: 6px;
+    }
+    
+    .stamped-preview-modal .modal-header {
+        padding: 10px 12px 8px;
+    }
+    
+    .stamped-preview-modal .modal-header h3 {
+        font-size: 14px;
+    }
+    
+    .stamped-preview-modal .modal-close-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+    
+    .stamped-preview-modal .modal-body {
+        max-height: calc(100vh - 140px);
+    }
+    
+    .stamped-preview-modal .image-container {
+        padding: 8px;
+        min-height: 200px;
+    }
+    
+    .stamped-preview-modal .pdf-container {
+        height: calc(100vh - 160px);
+        min-height: 250px;
+        margin: 3px;
+    }
+    
+    .stamped-preview-modal .unsupported-container {
+        height: 250px;
+        margin: 3px;
+    }
+    
+    .stamped-preview-modal .modal-footer {
+        padding: 10px 12px;
+    }
+    
+    .stamped-preview-modal .modal-download-btn,
+    .stamped-preview-modal .modal-cancel-btn {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+}
+
+/* iOS Safari 특별 처리 */
+@supports (-webkit-touch-callout: none) {
+    .stamped-preview-modal .modal-content {
+        /* iOS에서 안전 영역 고려 */
+        margin-top: env(safe-area-inset-top, 0);
+        margin-bottom: env(safe-area-inset-bottom, 0);
+    }
+    
+    .stamped-preview-modal .modal-body {
+        /* iOS에서 스크롤 개선 */
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
+    }
+}
+
+/* 가로 모드 모바일 */
+@media (max-width: 768px) and (orientation: landscape) {
+    .stamped-preview-modal .modal-content {
+        max-height: calc(100vh - 10px);
+    }
+    
+    .stamped-preview-modal .modal-body {
+        max-height: calc(100vh - 120px);
+    }
+    
+    .stamped-preview-modal .pdf-container {
+        height: calc(100vh - 140px);
+    }
+    
+    .stamped-preview-modal .image-container img {
+        max-height: calc(100vh - 140px);
+    }
+}
+
+/* 프리미엄 골드 날인본 버튼 스타일 */
+        .inline-view-btn.stamped-premium {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            border: none;
+            padding: 3px 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(243, 156, 18, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .inline-view-btn.stamped-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .inline-view-btn.stamped-premium:hover::before {
+            left: 100%;
+        }
+
+        .inline-view-btn.stamped-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+        }

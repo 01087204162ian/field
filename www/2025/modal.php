@@ -1,0 +1,757 @@
+<?php
+session_start();
+if (!isset($_SESSION['dnum']) || $_SESSION['user_level'] != 5) {
+    // 관리자 권한 확인
+    header("Location: login.php");
+    exit();
+}
+
+// 로그인한 대상자의 이름 가져오기
+$userName = $_SESSION['userName'];
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모달 데이터 로딩</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+            max-height: 90%;
+        }
+
+        .modal-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .close-modal {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+         td {
+            border: 1px solid #ddd;
+            padding: 6px;
+            text-align: center;
+        }
+
+        th {
+		 border: 1px solid #ddd;
+            padding: 8px;
+            background-color: #3498db;
+            color: white;
+			text-align: center;
+        }
+
+        h5 {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #2c3e50;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="text"] {
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: none;
+            font-size: 14px;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            background-color: #1abc9c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-primary:hover {
+            background-color: #16a085;
+        }
+		.walign{
+			text-align: center;
+		}
+
+	
+
+    .info-table label {
+        margin-right: 15px;
+        font-size: 14px;
+    }
+
+    .date-input {
+        width: 150px;
+        padding: 5px;
+        margin: 0 5px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    
+	.radio-group {
+        display: flex; /* 한 줄로 정렬 */
+        gap: 20px; /* 각 항목 간 간격 설정 */
+		justify-content: center; /* 수평 중앙 정렬 */
+        align-items: center; /* 수직 중앙 정렬 */
+        align-items: center; /* 버튼과 텍스트 수직 정렬 */
+        flex-wrap: nowrap; /* 텍스트가 줄 바꿈되지 않도록 설정 */
+    }
+
+    .radio-label {
+        display: flex; /* 버튼과 텍스트를 수평 정렬 */
+        align-items: center; /* 수직 정렬 */
+        font-size: 14px; /* 텍스트 크기 */
+        cursor: pointer; /* 클릭 가능한 커서 표시 */
+        white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+        min-width: 70px; /* 텍스트 공간 확대 */
+    }
+
+    .radio-label input[type="radio"] {
+        margin-right: 5px; /* 라디오 버튼과 텍스트 간 간격 */
+    }
+
+	.etc-input {
+        text-align: left; /* 값 오른쪽 정렬 */
+        border: 1px solid #ffffff; /* 테두리 회색 */
+        background-color: #ffffff; /* 배경 흰색 */
+        padding: 5px; /* 안쪽 여백 */
+        border-radius: 4px; /* 둥근 테두리 */
+        color: #333; /* 텍스트 색상 */
+        font-size: 14px; /* 텍스트 크기 */
+    }
+
+    .etc-input:focus {
+        outline: none; /* 포커스 시 파란 테두리 제거 */
+        border: 1px solid #1abc9c; /* 포커스 시 테두리 색 변경 */
+    }
+    .week-input {
+        text-align: right; /* 값 오른쪽 정렬 */
+        border: 1px solid #ffffff; /* 테두리 회색 */
+        background-color: #ffffff; /* 배경 흰색 */
+        padding: 5px; /* 안쪽 여백 */
+        border-radius: 4px; /* 둥근 테두리 */
+        color: #333; /* 텍스트 색상 */
+        font-size: 14px; /* 텍스트 크기 */
+    }
+
+    .week-input:focus {
+        outline: none; /* 포커스 시 파란 테두리 제거 */
+        border: 1px solid #1abc9c; /* 포커스 시 테두리 색 변경 */
+    }
+	/*아이디 select*/
+	.styled-select {
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        background: linear-gradient(to bottom, #fff, #f9f9f9);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .styled-select:hover {
+        border-color: #1abc9c;
+    }
+
+    .styled-select:focus {
+        outline: none;
+        border-color: #3498db;
+        background: #eaf6fd;
+    }
+	/*가입설계 번호 입력*/
+	/* 테이블 스타일 */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 16px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .styled-table td {
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+        vertical-align: middle;
+    }
+
+    .label-cell {
+        background-color: #3498db;
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+        width: 20%;
+    }
+
+    /* 입력 필드 스타일 */
+    .styled-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+    .styled-input:focus {
+        outline: none;
+        border-color: #3498db;
+        background: #f0f8ff;
+    }
+
+    /* 버튼 스타일 */
+    .btn-primary {
+        background-color: #1abc9c;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        text-align: center;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #16a085;
+    }
+    </style>
+</head>
+<body>
+    <button id="open-modal-btn" class="btn-primary" data-num="10607">모달 열기</button>
+    <!-- 두 번째 모달 버튼 -->
+    <button id="open-second-modal-btn" class="btn-primary" data-num="13491">두 번째 모달 열기</button>
+	
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal">X</button>
+            <div id="modal-body">
+                <!-- 계약자 정보 -->
+				<input type='hidden' id='questionwareNum'><!--questonware-->
+				<input type='hidden' id='school9'>
+				<input type='hidden' id='inscompany'>
+                <h5>1. 계약자 정보</h5>
+                <table>
+                    <tr>
+                        <th>사업자번호</th>
+                        <td><input class='etc-input' type="text" id="school2" ></td>
+                        <th>계약자</th>
+                        <td><input class='etc-input' type="text" id="school1" ></td>
+                    </tr>
+                    <tr>
+                        <th>주소</th>
+                        <td colspan="3"><textarea class='etc-input'  id="school3" rows="2" ></textarea></td>
+                    </tr>
+                    <tr>
+                        <th>연락처</th>
+                        <td><input class='etc-input'  type="text" id="school4" ></td>
+                        <th>이메일</th>
+                        <td><input class='etc-input'  type="text" id="school5" ></td>
+                    </tr>
+                </table>
+
+                <!-- 현장실습 관련 사항 -->
+                <h5>2. 현장실습 관련 사항</h5>
+				<table class="info-table">
+					<tr>
+						<th>현장실습시기</th>
+						<td >
+						   <div class="radio-group">
+								<label class="radio-label"><input type="radio" name="school6" value="1"> 1학기</label>
+								<label class="radio-label"><input type="radio" name="school6" value="2"> 하계계절</label>
+								<label class="radio-label"><input type="radio" name="school6" value="3"> 2학기</label>
+								<label class="radio-label"><input type="radio" name="school6" value="4"> 동계계절</label>
+							</div>
+
+						</td>
+					</tr>
+					<tr>
+						<th>실습기간(보험기간)</th>
+						<td>
+							<input type="text" id="school7" class="date-input etc-input" placeholder="보험시작일" > ~ 
+							<input type="text" id="school8" class="date-input etc-input" placeholder="보험종료일" >
+						</td>
+					</tr>
+				</table>
+				<h5>3. 가입유형</h5>
+				<table >
+
+				  <tr>
+					<th width='25%' rowspan='2'>보장내용</th>
+					
+					<th width='75%' colspan='2'>가입유형선택</th>
+				  </tr>
+					<tr>
+					 <th><div class="radio-group"><label class="radio-label"><input type="radio" class='plan' name='plan' value="1"> PLAN A</label></div></th>
+					
+					<th><div class="radio-group"><label class="radio-label"><input type="radio" class='plan' name='plan' value="2"> PLAN B</label></div></th>
+				  </tr>
+				   <tr>
+					<th>대인 및 대물 보상 </th>
+					<td>1사고당 <span id='daein1'></span>억원</td><!--2-->
+					<td>1사고당 <span id='daein2'></span>억원</td><!--3-->
+				  </tr>
+				   <tr>
+					<th>산재보험 초과 <br>사용자배상 </th>
+					<td>1사고당 <span id='daein3'></span>억원</td><!--2-->
+					<td>1사고당 <span id='daein4'></span>억원</td><!--3-->
+				  </tr>
+				  <tr>
+					<th>배상책임 자기부담금 </th>
+					<td>1십만원</td>
+					<td>1십만원</td>
+				  </tr>
+				  <tr>
+					<th>실습 중 치료비 </th>
+					<td>1인당 및 1사고당 : 1천만원</td>
+					<td>1인당 및 1사고당 : 1천만원</td>
+				  </tr>
+
+				</table>
+                <!-- 참여인원 -->
+                <h5>4. 실습기간 별 참여인원</h5>
+                <table>
+                    <tr>
+                        <th>실습기간</th>
+                        <th>참여인원</th>
+                        <th>실습기간</th>
+                        <th>참여인원</th>
+                    </tr>
+                    <!-- 반복 생성된 주차와 참여인원 -->
+                    <script>
+                        for (let i = 4; i <= 14; i ++) {
+							let j=i + 12;
+							
+                            document.write(`
+                                <tr>
+                                    <td class='walign'>${i}주</td>
+                                    <td><input  type="text" class="week-input" id="week${i}" ></td>
+                                    <td class='walign'>${j}주</td>
+                                    <td ><input class="week-input" type="text" id="week${j}" ></td>
+                                </tr>
+                            `);
+                        }
+                    </script>
+
+					<tr>
+						<td class='walign'>15주</td>
+						<td><input  type="text" class="week-input" id="week15" ></td>
+						<td class='walign'>대인보험료 <span id='daein'></td>
+						<td >대물보험료 <span id='daemool'></td>
+					</tr>
+					<tr>
+					<td colspan='2'>총 참여인원 수 </td>
+					<td><span id='week_total' >명</td>
+					<td>보험료계 <span id='totalP'></td>
+				  </tr>
+				  <tr>
+					<td colspan='4'><input type="submit"  id="write_" class="btn btn-primary" value="작성완료"/></td>
+				  </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+	<!-- 두 번째 모달 -->
+    <div id="second-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal">X</button>
+            <div id="second-modal-body">
+                <input type='hidden' id='questionwareNum_'><!--questionware-->
+				<input type='hidden' id='school9_'>
+				<input type='hidden' id='inscompany_'>
+				<input type='hidden' id='cNum_' /><!--아이디-->
+				<input type='hidden' id='userName' value='<?=$userName?>'>
+				 <!-- 두 번째 모달 내용 -->
+				<div style="display: flex; align-items: center; justify-content: space-between;">
+					<span id="beforegabunho"></span>
+					<select id="mem-id-select" class="styled-select"></select>
+				</div>
+                <table>
+
+					 <tr> 
+						<td width='12%'>사업자번호</td>
+						<td width='38%'><span id='school_2'></span></td>
+						<td width='12%'>계약자</td>
+						<td width='38%'><span id='school_1'></span></td>
+					  </tr>
+					 <tr> 
+						<td>주소</td>
+						<td colspan='3'><span id='school_3'></span></td>
+					 </tr>
+					  <tr> 
+						<td>연락처</td>
+						<td><span id='school_4'></span></td>
+						<td>이메일</td>
+						<td><span id='school_5'></span></td>
+					  </tr>
+					 <tr> 
+						<td>시기</td>
+						<td><span id='school_6'></span></td>
+						<td>실습기간</td>
+						<td><span id='school_7'></span>~<span id='school_8'></span></td>
+					   </tr>
+					   <tr> 
+						<td>가입유형</td>
+						<td colspan='3'><span id='school_9'></span>    대인대물 한도<span id='daein1_'></span>  산재초과 대인대물<span id='daein2_'></span></td>
+					   </tr>
+					    <td colspan='4'><span id='inwon'></span></td>
+					   <tr> 
+						<td colspan='4'>  대인보험료: <span id='daein_'></span> 대물보험료 : <span id='daemool_'></span>합계보험료 :<span id='totalP_'></span></td>
+					   </tr>
+					</table>
+					<table class="styled-table">
+					<tr>
+						<td class="label-cell">가입 설계번호</td>
+						<td colspan="2">
+							<input type="text" id="gabunho-input" class="styled-input" placeholder="가입 설계번호를 입력하세요" />
+						</td>
+						<td>
+							<button id="save-gabunho-btn" class="btn-primary">저장</button>
+						</td>
+					</tr>
+				</table>
+            </div>
+        </div>
+    </div>
+     <!-- 두번째 모달-->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // 모달 열기
+            $('#open-modal-btn').on('click', function () {
+                const num = $(this).data('num');
+                $.ajax({
+                    url: '_db/get_questionnaire_details.php',
+                    method: 'GET',
+                    data: { id: num },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success) {
+                            // 데이터를 채움
+							console.log(response.daeinP+'/'+response.daemoolP+'/'+response.data.week_total)
+							$('#questionwareNum').val(response.data.num);
+
+							if(response.data.num){
+								$('#write_').val('수정');
+							}
+                            $('#school1').val(response.data.school1);
+                            $('#school2').val(response.data.school2);
+                            $('#school3').val(response.data.school3);
+                            $('#school4').val(response.data.school4);
+                            $('#school5').val(response.data.school5);
+						    $("input[name='school6'][value='" + response.data.school6 + "']").prop("checked", true);
+                            $('#school7').val(response.data.school7); //보험기간
+                            $('#school8').val(response.data.school8);
+							$('#school9').val(response.data.school9);
+							$("input[name='plan'][value='" + response.data.school9 + "']").prop("checked", true);
+							if(response.data.directory==2){  //고등학교 1억, 2억, 대학교2억,3억
+
+									$("#daein1_").html('1');
+									$("#daein2_").html('2');
+									$("#daein3").html('1');
+									$("#daein4").html('2');
+								}else{
+
+									$("#daein1").html('2');
+									$("#daein2").html('3');
+									$("#daein3").html('2');
+									$("#daein4").html('3');
+
+								}
+							$('#daein').html(response.daeinP);
+							$('#daemool').html(response.daemoolP);
+
+							$('#week_total').html(response.data.week_total);
+							$('#totalP').html(response.preiminum);
+							for (let i = 4; i <= 26; i++) {
+								//console.log(response.data.week5);
+                                $(`#week${i}`).val(response.data[`week${i}`] || '0');
+                            }
+                            $('#modal').fadeIn();
+							 const inputs = document.querySelectorAll(".week-input");
+
+							// 모든 입력 필드에 대해 숫자 형식 적용
+							inputs.forEach(input => {
+								// 초기 값에 콤마 추가
+								input.value = formatNumber(input.value);
+
+								// 천 단위로 포맷하는 함수
+								function formatNumber(value) {
+									return value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+								}
+							});
+                        } else {
+                            alert(response.error);
+                        }
+                    },
+                    error: function () {
+                        alert('데이터 로드 실패.');
+                    }
+                });
+            });
+
+            // 모달 닫기
+            $('.close-modal').on('click', function () {
+                $('#modal').fadeOut();
+            });
+
+			// 모달 외부를 클릭하면 닫기
+			$('#modal').on('click', function (e) {
+				if ($(e.target).is('#modal')) {
+					$(this).fadeOut();
+				}
+			});
+			  // 두 번째 모달 열기
+           $('#open-second-modal-btn').on('click', function () {
+				const num = $(this).data('num');
+				$.ajax({
+					url: '_db/get_questionnaire_details.php',
+					method: 'GET',
+					data: { id: num },
+					dataType: 'json',
+					success: function (response) {
+						if (response.success) {
+							// 전 설계번호 및 모달 열기
+							if(response.beforeGabunho){
+								$('#beforegabunho').html("전 설계번호:"+response.beforeGabunho);
+							}else{
+								$('#beforegabunho').html("신규");
+							}
+							$('#second-modal').fadeIn();
+							$('#questionwareNum_').val(response.data.num);  // 현재 questionware num값이
+							$('#school9_').val(response.data.school9);
+							// 계약자 정보 설정
+							const fields = ['school1', 'school2', 'school3', 'school4', 'school5', 'school7', 'school8'];
+							fields.forEach(field => {
+								$(`#${field.replace('school', 'school_')}`).html(response.data[field]);
+							});
+
+							// 현장실습 시기
+							const periods = { "1": "1학기", "2": "하계", "3": "2학기", "4": "동계" };
+							$('#school_6').html(periods[response.data.school6] || "알 수 없음");
+
+							// 가입유형
+							const joinType = response.data.school9 == 1 ? "가입유형 A" : "가입유형 B";
+							$('#school_9').html(joinType);
+
+							// 대인대물 설정
+							const limits = response.data.directory == 2 ? { A: "2 억", B: "3 억" } : { A: "2 억", B: "3 억" };
+							$("#daein1_").html(limits[response.data.school9 == 1 ? 'A' : 'B']);
+							$("#daein2_").html(limits[response.data.school9 == 1 ? 'A' : 'B']);
+
+							// 보험료 정보
+							$('#daein_').html(response.daeinP);
+							$('#daemool_').html(response.daemoolP);
+							$('#totalP_').html(response.preiminum);
+
+
+
+
+							// 참여인원 정보
+							let inwons = "";
+							for (let i = 4; i <= 26; i++) {
+								if (response.data[`week${i}`] != 0) {
+									inwons += `<span id="week_${i}">${i} 주</span> <span id="week_inwon${i}">${response.data[`week${i}`]} </span> 명, `;
+								}
+							}
+							inwons += `총인원 : <span id="week_total_"></span>`;
+							$('#inwon').html(inwons);
+							$('#week_total_').html(response.data.week_total);
+
+							$('#gabunho-input').val(response.data.gabunho);
+							// mem_id 동적 로드
+							$.ajax({
+								url: '_db/get_idList.php',
+								method: 'GET',
+								dataType: 'json',
+								success: function (memData) {
+									const select = $('#mem-id-select');
+									select.empty(); // 기존 옵션 초기화
+									memData.forEach(item => {
+										select.append(`<option value="${item.num}">${item.mem_id}</option>`);
+									});
+									select.append(`<option value="신규 id">신규ID</option>`);
+									$('#mem-id-select').val(response.data.cNum); // 현재 선택된 값 설정
+								},
+								error: function () {
+									alert('mem_id 데이터를 가져오는 데 실패했습니다.');
+								}
+							});
+						} else {
+							alert(response.error);
+						}
+					},
+					error: function () {
+						alert('두 번째 데이터 로드 실패.');
+					}
+				});
+			});
+
+
+            // 모달 닫기
+            $('.close-modal').on('click', function () {
+                $(this).closest('.modal').fadeOut();
+            });
+
+            // 모달 외부를 클릭하면 닫기
+            $('.modal').on('click', function (e) {
+                if ($(e.target).is('.modal')) {
+                    $(this).fadeOut();
+                }
+            });
+
+
+			$('#save-gabunho-btn').on('click', function () {
+					const gabunho = $('#gabunho-input').val(); // 가입 설계번호 입력 값
+					const num = $('#questionwareNum_').val(); // questionware num값
+					const userName=$('#userName').val();
+
+					if (!gabunho.trim()) {
+						alert('가입 설계번호를 입력하세요.');
+						return;
+					}
+
+					$.ajax({
+						url: '_db/update_gabunho.php', // 업데이트 처리용 PHP 스크립트
+						method: 'POST',
+						data: { gabunho: gabunho, num: num,userName:userName },
+						dataType: 'json',
+						success: function (response) {
+							if (response.success) {
+								alert('가입 설계번호가 성공적으로 저장되었습니다.');
+								//$('#beforegabunho').html(gabunho); // UI 업데이트
+							} else {
+								alert('저장 실패: ' + response.error);
+							}
+						},
+						error: function () {
+							alert('가입 설계번호 저장 중 오류가 발생했습니다.');
+						}
+					});
+				});
+
+			// 수정 버튼 클릭
+			$('#write_').on('click', function () {
+				$('#daein').html('');
+				$('#daemool').html('');
+
+				$('#week_total').html('');
+				$('#totalP').html('');
+				const formData = {
+					id:$('#questionwareNum').val(),
+					school1: $('#school1').val(),
+					school2: $('#school2').val(),
+					school3: $('#school3').val(),
+					school4: $('#school4').val(),
+					school5: $('#school5').val(),
+					school6: $('input[name="school6"]:checked').val(),
+					school7: $('#school7').val(),
+					school8: $('#school8').val(),
+					school9: $('#school9').val(),
+					plan: $('input[name="plan"]:checked').val(),
+					totalP:$('#totalP').html().replace(/,/g, '')
+				};
+
+				// 주차별 참여인원 데이터를 추가
+				for (let i = 4; i <= 26; i++) {
+					formData[`week${i}`] = $(`#week${i}`).val().replace(/,/g, ''); // 숫자에서 콤마 제거
+				}
+
+				    
+				// AJAX 요청으로 데이터 전송
+				$.ajax({
+					url: '_db/update_questionnaire.php', // 수정 요청을 처리하는 서버 스크립트
+					method: 'POST',
+					data: formData,
+					dataType: 'json',
+					success: function (response) {
+						if (response.success) {
+							alert('수정되었습니다.');
+
+							$('#daein').html(response.daeinP);
+							$('#daemool').html(response.daemoolP);
+
+							$('#week_total').html(response.week_total);
+							$('#totalP').html(response.Preminum);
+							//$('#modal').fadeOut(); // 성공 후 모달 닫기
+						} else {
+							alert(response.error || '수정에 실패했습니다.');
+						}
+					},
+					error: function () {
+						alert('수정 요청 중 오류가 발생했습니다.');
+					}
+				});
+			});
+
+			// 아이디 select
+
+
+        });
+    </script>
+</body>
+</html>

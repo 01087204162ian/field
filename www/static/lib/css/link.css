@@ -1,0 +1,177 @@
+   .hight{
+		padding-top: 15px;
+   }
+   .contact1 td{
+	  text-align: center; 
+	}
+
+	.contact1 th{
+	  text-align: center;
+	  background-color:#e1ffff;
+	}
+	.siljek td{
+	  text-align: right; 
+	  
+	}
+
+	.siljek th{
+	  text-align: center;
+	  background-color:#e1ffff;
+	  
+	}
+	.inputTextarea{
+		  border-bottom: #ffffff 1px solid; 
+		  border-left: #ffffff 1px solid; 
+		  border-right: #ffffff 1px solid; 
+		  border-top: #ffffff 1px solid; 
+		  font-family:돋움,굴림,arial,verdana; 
+		  font-size:9pt;
+		  //height:20px;
+		  width:100%;
+	}
+	.input{
+		  border-bottom: #ffffff 1px solid; 
+		  border-left: #ffffff 1px solid; 
+		  border-right: #ffffff 1px solid; 
+		  border-top: #ffffff 1px solid; 
+		  font-family:돋움,굴림,arial,verdana; 
+		  font-size:9pt;
+		  height:20px;
+		  width:95%;
+	}
+	.inputR{
+		  border-bottom: #ffffff 1px solid; 
+		  border-left: #ffffff 1px solid; 
+		  border-right: #ffffff 1px solid; 
+		  border-top: #ffffff 1px solid; 
+		  font-family:돋움,굴림,arial,verdana; 
+		  font-size:9pt;
+		  height:20px;
+		  width:90%;
+		  text-align:right;
+	}
+	.input50{
+		  border-bottom: #ffffff 1px solid; 
+		  border-left: #ffffff 1px solid; 
+		  border-right: #ffffff 1px solid; 
+		  border-top: #ffffff 1px solid; 
+		  font-family:돋움,굴림,arial,verdana; 
+		  font-size:9pt;
+		  height:20px;
+		  width:45%;
+		  text-align:center;
+	}
+
+
+	.input2{
+		  border-bottom: #ffffff 1px solid; 
+		  border-left: #ffffff 1px solid; 
+		  border-right: #ffffff 1px solid; 
+		  border-top: #ffffff 1px solid; 
+		  font-family:돋움,굴림,arial,verdana; 
+		  font-size:9pt;
+		  height: 40pt;
+		  width:95%;
+	}
+	.plan{
+		height: 10pt;
+	}
+    #bike td,th,
+	#rider_ td,th{
+	  text-align: center; 
+	  vertical-align:middle;
+	}
+	
+	#bun1,#bun2,
+	#bun3,#bun4,#bun5{
+		padding-top:20px;
+	}
+	#bun5,#bun6,
+	#bun7,#bun8{
+
+		padding-bottom:20px;
+	}
+
+	#dambo1,
+	#dambo7,
+	#dambo9{
+		padding-top:20px;
+		text-align:center;
+	}
+	#dambo2,
+	#dambo8,
+	#dambo10{
+		padding-top:20px;
+		text-align:right;
+	}
+
+	#dambo3,
+	#dambo5{
+		padding-top:30px;
+		text-align:center;
+	}
+
+	#dambo4,
+	#dambo6{
+		padding-top:30px;
+		text-align:right;
+	}
+
+
+	#dambo11,#dambo12,#dambo13,#dambo14,
+	#dambo19,#dambo20,#dambo21,#dambo22{
+		padding-top:30px;
+		text-align:center;
+	}
+
+	#dambo15,#dambo16,#dambo17,#dambo18	
+	{
+		padding-top:30px;
+		text-align:right;
+	}
+
+	.contact3 td{
+	  text-align: left; 
+	  vertical-align:middle;
+	}
+
+	.contact3 th{
+	  text-align: center;
+	  background-color:#e1ffff;
+	}
+
+	.botton{
+		padding-top:10px;
+
+	}
+
+   .contact2 td{
+	  text-align: center; 
+	  vertical-align:middle;
+	}
+
+	.contact2 th{
+	  text-align: left;
+	  vertical-align:middle;
+	  background-color:#ffffff;
+	  
+	}
+#explain{
+
+	margin-top: 10px;
+}
+
+#explain2{
+
+	margin-top: 30px;
+}
+
+.arrowmargin{
+	padding-top: 5px;
+	padding-left: 50px;
+}
+
+
+
+
+   

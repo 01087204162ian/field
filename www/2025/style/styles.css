@@ -1,0 +1,870 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+
+
+
+
+/* 기타 스타일 */
+
+    .top-bar {
+        background-color: #2c3e50;
+        color: #fff;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .top-bar .welcome {
+        font-size: 14px;
+    }
+    .top-bar .logout-form {
+        margin: 0;
+    }
+    .top-bar .logout-btn {
+        background-color: #e74c3c;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    .top-bar .logout-btn:hover {
+        background-color: #c0392b;
+    }
+    .menu {
+      
+        display: flex;
+        padding: 10px;
+        justify-content: center;
+        margin: 0;
+    }
+    
+.menu-item {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.menu-item:hover {
+    background-color: #1abc9c;
+    color: #ffffff;
+}
+
+.menu-item.active {
+    background-color: #1abc9c;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+
+  .content {
+    display: flex; /* Flexbox를 사용하여 레이아웃 설정 */
+    flex-direction: row; /* 가로 방향으로 배치 */
+}
+
+.sidebar {
+    background-color: #34495e; /* 상단 메뉴와 동일한 배경색 */
+    padding: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    width: 200px; /* 너비 조정 */
+    min-height: 100vh; /* 화면 전체 높이 */
+}
+
+#left-menu {
+    list-style-type: none; /* 기본 리스트 스타일 제거 */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+}
+
+#left-menu li {
+    margin: 0;
+    padding: 0;
+}
+
+#left-menu li a {
+    display: block;
+    padding: 15px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+    background-color: #34495e;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#left-menu li a:hover {
+    background-color: #1abc9c; /* 호버 시 색상 */
+    color: #ffffff;
+}
+
+
+#left-menu li a.active {
+    background-color: #1abc9c; /* 활성화된 메뉴 배경색 */
+    font-weight: bold; /* 활성화된 메뉴 강조 */
+    color: #fff; /* 텍스트 색상 */
+}
+.main-content {
+    flex-grow: 1; /* 나머지 공간을 차지 */
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.search-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 좌우 끝으로 배치 */
+    margin-bottom: 10px;
+    padding: 0 10px; /* 여백 추가 */
+}
+
+.search-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 좌우 끝으로 배치 */
+    margin-bottom: 5px;
+    padding: 0 10px; /* 좌우 여백 */
+    gap: 10px; /* 아이템 간격 */
+}
+
+.search-left {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* input과 버튼 간격 */
+}
+
+.schoolInput  {
+    padding: 5px;
+    font-size: 14px;
+    width: 200px;
+}
+
+.search-left button {
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+	width:100px;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px; /* 버튼 간격 */
+}
+.radio1-group {
+    display: flex; /* 한 줄로 정렬 */
+    gap: 20px; /* 각 항목 간 간격 설정 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 버튼과 텍스트 수직 정렬 */
+    flex-wrap: nowrap; /* 텍스트가 줄 바꿈되지 않도록 설정 */
+}
+
+.radio1-label {
+    display: flex; /* 버튼과 텍스트를 수평 정렬 */
+    align-items: center; /* 수직 정렬 */
+    font-size: 14px; /* 텍스트 크기 */
+    cursor: pointer; /* 클릭 가능한 커서 표시 */
+    white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+    min-width: 70px; /* 텍스트 공간 확대 */
+	margin-right: 20px; /* 각 label 간격을 넓힘 */
+}
+
+.radio1-label input[type="radio"] {
+    margin-right: 8px; /* 버튼과 텍스트 간 간격을 넓힘 */
+    width: 16px; /* 버튼 크기 */
+    height: 16px; /* 버튼 크기 */
+}
+.button-group .btn-right {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 0;
+    }
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+    th, td {
+        padding: 10px;
+        text-align: center;
+    }
+    th {
+        background-color: #3498db;
+        color: white;
+    }
+	 .pagination {
+		margin: 20px 0;
+		text-align: center;
+	}
+
+	.pagination a {
+		margin: 0 5px;
+		padding: 5px 10px;
+		text-decoration: none;
+		color: #3498db;
+		border: 1px solid #ddd;
+		border-radius: 3px;
+		cursor: pointer;
+	}
+
+	.pagination a.active {
+		background-color: #3498db;
+		color: #fff;
+		border-color: #3498db;
+	}
+
+	.pagination a:hover {
+		background-color: #2980b9;
+		color: #fff;
+	}
+
+	.modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+            max-height: 90%;
+        }
+
+ 
+
+        .close-modal {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+         td {
+            border: 1px solid #ddd;
+            padding: 6px;
+            text-align: center;
+        }
+		.s_td{
+			border: 1px solid #ddd;
+            padding: 3px;
+            text-align: center;
+		}
+
+        th {
+		 border: 1px solid #ddd;
+            padding: 8px;
+            background-color: #3498db;
+            color: white;
+			text-align: center;
+        }
+
+        h5 {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #2c3e50;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="text"] {
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: none;
+            font-size: 14px;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            background-color: #1abc9c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-primary:hover {
+            background-color: #16a085;
+        }
+		.walign{
+			text-align: center;
+		}
+
+	
+
+    .info-table label {
+        margin-right: 15px;
+        font-size: 14px;
+    }
+
+    .date-input {
+        width: 150px;
+        padding: 5px;
+        margin: 0 5px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    
+	.radio-group {
+        display: flex; /* 한 줄로 정렬 */
+        gap: 20px; /* 각 항목 간 간격 설정 */
+		justify-content: center; /* 수평 중앙 정렬 */
+        align-items: center; /* 수직 중앙 정렬 */
+        align-items: center; /* 버튼과 텍스트 수직 정렬 */
+        flex-wrap: nowrap; /* 텍스트가 줄 바꿈되지 않도록 설정 */
+    }
+
+    .radio-label {
+        display: flex; /* 버튼과 텍스트를 수평 정렬 */
+        align-items: center; /* 수직 정렬 */
+        font-size: 14px; /* 텍스트 크기 */
+        cursor: pointer; /* 클릭 가능한 커서 표시 */
+        white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+        min-width: 70px; /* 텍스트 공간 확대 */
+    }
+
+    .radio-label input[type="radio"] {
+        margin-right: 5px; /* 라디오 버튼과 텍스트 간 간격 */
+    }
+
+	.etc-input {
+        text-align: left; /* 값 오른쪽 정렬 */
+        border: 1px solid #ffffff; /* 테두리 회색 */
+        background-color: #ffffff; /* 배경 흰색 */
+        padding: 5px; /* 안쪽 여백 */
+        border-radius: 4px; /* 둥근 테두리 */
+        color: #333; /* 텍스트 색상 */
+        font-size: 14px; /* 텍스트 크기 */
+    }
+
+    .etc-input:focus {
+        outline: none; /* 포커스 시 파란 테두리 제거 */
+        border: 1px solid #1abc9c; /* 포커스 시 테두리 색 변경 */
+    }
+    .week-input {
+        text-align: right; /* 값 오른쪽 정렬 */
+        border: 1px solid #ffffff; /* 테두리 회색 */
+        background-color: #ffffff; /* 배경 흰색 */
+        padding: 5px; /* 안쪽 여백 */
+        border-radius: 4px; /* 둥근 테두리 */
+        color: #333; /* 텍스트 색상 */
+        font-size: 14px; /* 텍스트 크기 */
+    }
+
+    .week-input:focus {
+        outline: none; /* 포커스 시 파란 테두리 제거 */
+        border: 1px solid #1abc9c; /* 포커스 시 테두리 색 변경 */
+    }
+	/*아이디 select*/
+	.styled-select {
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        background: linear-gradient(to bottom, #fff, #f9f9f9);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .styled-select:hover {
+        border-color: #1abc9c;
+    }
+
+    .styled-select:focus {
+        outline: none;
+        border-color: #3498db;
+        background: #eaf6fd;
+    }
+	/*가입설계 번호 입력*/
+	/* 테이블 스타일 */
+   
+
+    /* label-cell 스타일에서 background-color 제거 */
+
+    /* 입력 필드 스타일 */
+	.styled-input {
+		width: 100%; /* 너비를 약간 줄임 */
+		padding: 0px; /* 내부 여백을 줄임 */
+		border: 1px solid #FFF; /* 테두리는 유지 */
+		border-radius: 4px; /* 둥근 모서리 약간 감소 */
+		font-size: 12px; /* 텍스트 크기를 줄임 */
+		box-sizing: border-box; /* 전체 크기에 테두리 포함 */
+		text-align:center;
+	}
+
+    .styled-input:focus {
+        outline: none;
+        border-color: #3498db;
+        background: #f0f8ff;
+    }
+
+    /* 버튼 스타일 */
+    .btn-primary {
+        background-color: #1abc9c;
+        color: white;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        text-align: center;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #16a085;
+    }
+
+	/*번호와 사업자 번호 링크*/
+		.btn-link {
+			display: inline-block;
+			padding: 2px 6px; /* 작은 패딩 */
+			font-size: 11px; /* 작은 글씨 크기 */
+			color: #fff; /* 텍스트 색상 */
+			background-color: #6c757d; /* 기본 버튼 색상 (회색) */
+			text-decoration: none;
+			border-radius: 2px; /* 약간 둥근 모서리 */
+			transition: background-color 0.3s, box-shadow 0.3s;
+			text-align: center;
+		}
+
+		.btn-link:hover {
+			background-color: #5a6268; /* 호버 상태 색상 (더 어두운 회색) */
+			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+		}
+
+		.btn-link:active {
+			background-color: #343a40; /* 활성 상태 색상 (짙은 회색) */
+			box-shadow: none;
+		}
+
+
+		@media (max-width: 768px) {
+			.content {
+				flex-direction: column; /* 세로 방향으로 배치 */
+			}
+
+			.sidebar {
+				width: 100%; /* 전체 너비 차지 */
+				border-right: none; /* 경계선 제거 */
+				border-bottom: 1px solid #ddd; /* 하단 경계선 추가 */
+			}
+
+			.main-content {
+				padding-top: 10px; /* 상단 여백 추가 */
+			}
+		}
+
+
+		/* 실적 모달*/
+		/* Modal 스타일 */
+.modal {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 8px; /* 모서리 둥글게 */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+}
+
+/* Header 스타일 */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.modal-title {
+    font-size: 1.rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.nav.pull-right {
+    display: flex;
+    gap: 10px; /* 항목 간격 */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav.pull-right select {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f9fa; /* 선택창 배경 */
+    cursor: pointer;
+}
+
+.nav.pull-right select:focus {
+    outline: none;
+    border-color: #007bff; /* 포커스 시 파란색 테두리 */
+}
+
+.nav.pull-right li {
+    display: flex;
+    align-items: center;
+}
+
+/* 테이블 스타일 */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    color: #222;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* 짝수 행 배경 */
+}
+
+.table tbody tr:hover {
+    background-color: #e8f5ff; /* 행 hover 효과 */
+}
+.table th, .table td {
+    font-size: 0.8rem; /* 폰트 크기를 더 작게 조정 */
+}
+.table th {
+    background-color: #007bff; /* 파란색 배경 */
+    color: #fff; /* 텍스트는 흰색 */
+}
+.table td {
+    text-align: right; /* 텍스트 오른쪽 정렬 */
+}
+/* 버튼 스타일 */
+.btn {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3; /* hover 효과 */
+}
+
+.btn-default {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-default:hover {
+    background-color: #5a6268;
+}
+
+/* 푸터 스타일 */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    border-top: 2px solid #ddd;
+    padding-top: 10px;
+}
+
+
+#logout-btn {
+    background-color: #dc3545; /* Bootstrap Danger 색상 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#logout-btn:hover {
+    background-color: #c82333; /* Hover 시 더 어두운 색 */
+}
+
+/* 버튼 그룹 중앙 정렬 */
+.button-group {
+    display: flex; /* 플렉스 박스 사용 */
+    justify-content: center; /* 중앙 정렬 */
+    gap: 10px; /* 버튼 간 간격 */
+    margin-top: 20px; /* 버튼 그룹 위쪽 여백 */
+}
+
+
+
+.button-group2 {
+    display: flex;
+    flex-direction: column; /* 행을 세로로 배치 */
+    align-items: center; /* 각 행을 중앙 정렬 */
+    gap: 20px; /* 행 간 간격 */
+}
+
+.button-group2 .row {
+    display: flex;
+    justify-content: center; /* 내부 버튼을 중앙 정렬 */
+    gap: 15px; /* 버튼 간 간격 */
+}
+
+/* 버튼 스타일 */
+.btn-primary {
+    background-color: rgba(0, 123, 255, 0.6); /* 기본 색상: 더 흐리게, 60% 불투명도 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+.btn-primary:hover {
+    background-color: rgba(0, 123, 255, 0.9); /* 호버 상태: 더 선명하게, 90% 불투명도 */
+    color: white; /* 텍스트 색상 유지 */
+    opacity: 1; /* 호버 시 완전히 불투명 */
+}
+
+select.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    appearance: none;
+}
+
+select.btn-primary:focus {
+    outline: none;
+    border-color: #0056b3;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* claim*/
+ .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .pagination button {
+            margin: 0 5px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .pagination button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+        }
+
+	.loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #4CAF50;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #loader-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 999;
+        }
+
+
+		 #modal-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        #modal-content h2 {
+            margin-top: 0;
+        }
+
+        #modal-content button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #modal-content button:hover {
+            background-color: #2980b9;
+        }
+
+.right-align {
+    text-align: right; /* 텍스트 오른쪽 정렬 */
+}
+
+/*claimList2.php*
+ /* select 박스 스타일 */
+	.custom-select {
+		width: 200px; /* 너비 설정 */
+		padding: 5px; /* 내부 패딩 */
+		font-size: 12px; /* 글자 크기 */
+		border: 1px solid #ccc; /* 회색 테두리 */
+		border-radius: 5px; /* 둥근 모서리 */
+		background-color: #ffffff; /* 배경색 */
+		color: #333; /* 글자 색상 */
+		outline: none; /* 선택 시 외곽선 제거 */
+		cursor: pointer; /* 마우스 커서 변경 */
+	}
+
+	/* select 요소 포커스 시 스타일 */
+	.custom-select:focus {
+		border-color: #0056b3; /* 포커스 시 진한 파란색 */
+		box-shadow: 0 0 5px rgba(0, 91, 187, 0.5);
+	}
+
+	/* option 스타일 */
+	.custom-select option {
+		font-size: 14px;
+		padding: 5px;
+	}

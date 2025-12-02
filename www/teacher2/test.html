@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>질문서 리스트 - 현장실습보험 관리 시스템</title>
+    <style>
+        /* 기본 설정 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+
+        /* 컨테이너 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 헤더 */
+        .page-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .page-title {
+            color: #2d3748;
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .refresh-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        /* 검색 섹션 */
+        .search-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .search-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .search-group label {
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+
+        .search-input {
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .search-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            outline: none;
+        }
+
+        .search-btn, .reset-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .search-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .reset-btn {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .search-btn:hover, .reset-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 질문서 카드 컨테이너 */
+        .questions-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 로딩 상태 */
+        .loading-container {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e2e8f0;
+            border-radius: 50%;
+            border-top-color: #667eea;
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 카드 그리드 */
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* 개별 질문서 카드 */
+        .question-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .question-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .question-card:hover::before {
+            opacity: 1;
+        }
+
+        /* 카드 헤더 */
+        .card-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f0f4f8;
+        }
+
+        .card-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.375rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            padding: 0.375rem 0.875rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #d97706;
+            border: 1px solid #fbbf24;
+        }
+
+        .status-active {
+            background: #d1fae5;
+            color: #059669;
+            border: 1px solid #34d399;
+        }
+
+        .status-completed {
+            background: #dbeafe;
+            color: #2563eb;
+            border: 1px solid #60a5fa;
+        }
+
+        /* 카드 내용 */
+        .card-content {
+            margin-bottom: 1.5rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .info-label {
+            color: #64748b;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-value {
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .semester-badge {
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .insurance-period {
+            background: #f0f9ff;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border-left: 4px solid #0ea5e9;
+            margin-bottom: 0.75rem;
+        }
+
+        .insurance-period-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 0.25rem;
+        }
+
+        .insurance-period-value {
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        /* 카드 액션 */
+        .card-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .view-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .download-btn {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 데이터 없음 메시지 */
+        .no-data {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #64748b;
+        }
+
+        .no-data i {
+            font-size: 4rem;
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .no-data h3 {
+            color: #475569;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 페이지네이션 */
+        .pagination-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .pagination-info {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .pagination-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .page-btn {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #e2e8f0;
+            background: white;
+            color: #475569;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .page-btn:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .page-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 1.5rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-form {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .search-group {
+                margin-bottom: 0.5rem;
+            }
+
+            .questions-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .question-card {
+                padding: 1.25rem;
+            }
+
+            .card-actions {
+                flex-direction: column;
+            }
+
+            .pagination-container {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .pagination-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .questions-container {
+                padding: 1rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .info-row {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* 애니메이션 */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 검색 결과 하이라이트 */
+        .highlight {
+            background: #fef3c7;
+            padding: 0.125rem 0.25rem;
+            border-radius: 4px;
+        }
+
+        /* 툴팁 */
+        .tooltip {
+            position: relative;
+            cursor: help;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1f2937;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 페이지 헤더 -->
+        <div class="page-header fade-in">
+            <div class="header-content">
+                <h1 class="page-title">
+                    <i class="fas fa-list-alt"></i>
+                    질문서 리스트
+                </h1>
+                <button class="refresh-btn" onclick="refreshQuestionsList()">
+                    <i class="fas fa-sync-alt"></i>
+                    새로고침
+                </button>
+            </div>
+        </div>
+
+        <!-- 검색 섹션 -->
+        <div class="search-section fade-in">
+            <form class="search-form" onsubmit="handleSearch(event)">
+                <div class="search-group">
+                    <label for="searchSchool">학교명 검색</label>
+                    <input 
+                        type="text" 
+                        id="searchSchool" 
+                        class="search-input" 
+                        placeholder="학교명을 입력하세요"
+                        value=""
+                    >
+                </div>
+                <button type="submit" class="search-btn">
+                    <i class="fas fa-search"></i>
+                    검색
+                </button>
+                <button type="button" class="reset-btn" onclick="resetSearch()">
+                    <i class="fas fa-times"></i>
+                    초기화
+                </button>
+            </form>
+        </div>
+
+        <!-- 질문서 컨테이너 -->
+        <div class="questions-container fade-in">
+            <!-- 로딩 상태 -->
+            <div id="questionsLoading" class="loading-container">
+                <div class="loading-spinner"></div>
+                <p>질문서 목록을 불러오는 중...</p>
+            </div>
+
+            <!-- 질문서 그리드 -->
+            <div id="questionsGrid" class="questions-grid" style="display: none;">
+                <!-- 동적으로 생성되는 카드들 -->
+            </div>
+
+            <!-- 데이터 없음 메시지 -->
+            <div id="noDataMessage" class="no-data" style="display: none;">
+                <i class="fas fa-inbox"></i>
+                <h3>등록된 질문서가 없습니다</h3>
+                <p>새로운 현장실습보험을 신청해보세요.</p>
+            </div>
+
+            <!-- 페이지네이션 -->
+            <div id="questionsPagination" class="pagination-container" style="display: none;">
+                <div class="pagination-info">
+                    <span id="paginationInfo">전체 0개 (1/1 페이지)</span>
+                </div>
+                <div class="pagination-buttons" id="paginationButtons">
+                    <!-- 동적으로 생성되는 페이지 버튼들 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 질문서 관리 클래스
+        class QuestionsManager {
+            constructor() {
+                this.isLoading = false;
+                this.currentData = null;
+                this.currentPage = 1;
+                this.searchQuery = '';
+                this.init();
+            }
+
+            init() {
+                console.log('질문서 관리 시스템 초기화...');
+                this.loadQuestionsList();
+            }
+
+            // 학기 구분 함수
+            getSemesterName(school6) {
+                const semesters = {
+                    1: '1학기',
+                    2: '하계계절',
+                    3: '2학기',
+                    4: '동계계절'
+                };
+                return semesters[parseInt(school6)] || '미정';
+            }
+
+            // 질문서 상태 판단
+            getQuestionStatus(question) {
+                const currentDate = new Date();
+                const startDate = new Date(question.school7);
+                const endDate = new Date(question.school8);
+                
+                if (currentDate < startDate) {
+                    return { text: '시작 전', class: 'status-pending' };
+                } else if (currentDate >= startDate && currentDate <= endDate) {
+                    return { text: '진행 중', class: 'status-active' };
+                } else {
+                    return { text: '완료', class: 'status-completed' };
+                }
+            }
+
+            // 날짜 포맷팅
+            formatDate(dateString) {
+                return new Date(dateString).toLocaleDateString('ko-KR', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            }
+
+            // 실습기간 계산
+            calculateDuration(startDate, endDate) {
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+                const diffTime = Math.abs(end - start);
+                return Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+            }
+
+            // 가격 포맷팅
+            formatPrice(price) {
+                return Number(price).toLocaleString('ko-KR');
+            }
+
+            // 질문서 카드 생성
+            createQuestionCard(question, index) {
+                const semester = this.getSemesterName(question.school6);
+                const status = this.getQuestionStatus(question);
+                const duration = this.calculateDuration(question.school7, question.school8);
+                const formattedPrice = this.formatPrice(question.preiminum);
+
+                return `
+                    <div class="question-card fade-in" style="animation-delay: ${index * 0.1}s">
+                        <div class="card-header">
+                            <div class="card-number">#${question.num}</div>
+                            <div class="status-badge ${status.class}">${status.text}</div>
+                        </div>
+                        
+                        <div class="card-content">
+                            <div class="insurance-period">
+                                <div class="insurance-period-label">
+                                    <i class="fas fa-calendar"></i>
+                                    보험 기간
+                                </div>
+                                <div class="insurance-period-value">
+                                    ${this.formatDate(question.school7)} ~ ${this.formatDate(question.school8)}
+                                </div>
+                            </div>
+                            
+                            <div class="info-row">
+                                <span class="info-label">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    실습 학기
+                                </span>
+                                <span class="semester-badge">${semester}</span>
+                            </div>
+                            
+                            <div class="info-row">
+                                <span class="info-label">
+                                    <i class="fas fa-clock"></i>
+                                    실습 기간
+                                </span>
+                                <span class="info-value">${duration}일</span>
+                            </div>
+                            
+                            <div class="info-row">
+                                <span class="info-label">
+                                    <i class="fas fa-users"></i>
+                                    참여 인원
+                                </span>
+                                <span class="info-value">${question.week_total}명</span>
+                            </div>
+                            
+                            <div class="info-row">
+                                <span class="info-label">
+                                    <i class="fas fa-won-sign"></i>
+                                    보험료
+                                </span>
+                                <span class="info-value">${formattedPrice}원</span>
+                            </div>
+                            
+                            ${question.certi ? `
+                                <div class="info-row">
+                                    <span class="info-label">
+                                        <i class="fas fa-certificate"></i>
+                                        증권번호
+                                    </span>
+                                    <span class="info-value">${question.certi}</span>
+                                </div>
+                            ` : ''}
+                        </div>
+                        
+                        <div class="card-actions">
+                            <button class="action-btn view-btn" onclick="viewQuestionDetail(${question.num})">
+                                <i class="fas fa-file-alt"></i>
+                                질문서 보기
+                            </button>
+                            <button class="action-btn download-btn" onclick="downloadQuestion(${question.num})">
+                                <i class="fas fa-download"></i>
+                                다운로드
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // 질문서 목록 렌더링
+            renderQuestionsList(data) {
+                const gridElement = document.getElementById('questionsGrid');
+                const loadingElement = document.getElementById('questionsLoading');
+                const noDataElement = document.getElementById('noDataMessage');
+                const paginationElement = document.getElementById('questionsPagination');
+
+                // DOM 요소 존재 확인
+                if (!gridElement) {
+                    console.error('questionsGrid 요소를 찾을 수 없습니다.');
+                    return;
+                }
+
+                // 로딩 숨기기
+                if (loadingElement) {
+                    loadingElement.style.display = 'none';
+                }
+
+                if (!data || !data.questions || data.questions.length === 0) {
+                    gridElement.style.display = 'none';
+                    if (noDataElement) {
+                        noDataElement.style.display = 'block';
+                    }
+                    if (paginationElement) {
+                        paginationElement.style.display = 'none';
+                    }
+                    return;
+                }
+
+                // 카드 렌더링
+                const cardsHTML = data.questions.map((question, index) => 
+                    this.createQuestionCard(question, index)
+                ).join('');
+
+                gridElement.innerHTML = cardsHTML;
+                gridElement.style.display = 'grid';
+                
+                if (noDataElement) {
+                    noDataElement.style.display = 'none';
+                }
+
+                // 페이지네이션 렌더링
+                this.renderPagination(data);
+            }
+
+            // 페이지네이션 렌더링
+            renderPagination(data) {
+                const paginationElement = document.getElementById('questionsPagination');
+                const paginationInfo = document.getElementById('paginationInfo');
+                const paginationButtons = document.getElementById('paginationButtons');
+
+                // DOM 요소 존재 확인
+                if (!paginationElement || !paginationInfo || !paginationButtons) {
+                    console.warn('페이지네이션 요소를 찾을 수 없습니다.');
+                    return;
+                }
+
+                if (data.total_pages <= 1) {
+                    paginationElement.style.display = 'none';
+                    return;
+                }
+
+                paginationElement.style.display = 'flex';
+                paginationInfo.textContent = `전체 ${data.total}개 (${data.page}/${data.total_pages} 페이지)`;
+
+                let buttonsHTML = '';
+
+                // 이전 버튼
+                if (data.page > 1) {
+                    buttonsHTML += `<button class="page-btn" onclick="goToPage(${data.page - 1})">
+                        <i class="fas fa-chevron-left"></i> 이전
+                    </button>`;
+                }
+
+                // 페이지 번호 버튼들
+                const startPage = Math.max(1, data.page - 2);
+                const endPage = Math.min(data.total_pages, data.page + 2);
+
+                for (let i = startPage; i <= endPage; i++) {
+                    const activeClass = i === data.page ? 'active' : '';
+                    buttonsHTML += `<button class="page-btn ${activeClass}" onclick="goToPage(${i})">${i}</button>`;
+                }
+
+                // 다음 버튼
+                if (data.page < data.total_pages) {
+                    buttonsHTML += `<button class="page-btn" onclick="goToPage(${data.page + 1})">
+                        다음 <i class="fas fa-chevron-right"></i>
+                    </button>`;
+                }
+
+                paginationButtons.innerHTML = buttonsHTML;
+            }
+
+            // 질문서 목록 로드
+            async loadQuestionsList(page = 1, searchQuery = '') {
+                try {
+                    this.isLoading = true;
+                    this.showLoading(true);
+
+                    // cNum 확인
+                    const cNum = sessionStorage.getItem('cNum');
+                    if (!cNum) {
+                        throw new Error('로그인 정보가 없습니다. 다시 로그인해주세요.');
+                    }
+
+                    // 서버에 요청할 데이터 준비
+                    const formData = new FormData();
+                    formData.append('action', 'list');
+                    formData.append('cNum', cNum);
+                    formData.append('page', page);
+                    formData.append('limit', 6); // 카드형이므로 한 페이지당 6개
+                    formData.append('search_school', searchQuery);
+                    formData.append('search_mode', 2); // 포함 검색
+
+                    console.log('서버 요청 데이터:', {
+                        action: 'list',
+                        cNum: cNum,
+                        page: page,
+                        limit: 6,
+                        search_school: searchQuery,
+                        search_mode: 2
+                    });
+
+                    // 서버로 요청
+                    const response = await fetch('api/questionsList.php', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`서버 오류: ${response.status} ${response.statusText}`);
+                    }
+
+                    const result = await response.json();
+                    console.log('서버 응답:', result);
+
+                    if (!result.success) {
+                        throw new Error(result.message || '서버 처리 중 오류가 발생했습니다.');
+                    }
+
+                    // 데이터 저장 및 렌더링
+                    this.currentData = result.data;
+                    this.currentPage = page;
+                    this.searchQuery = searchQuery;
+                    
+                    this.renderQuestionsList(result.data);
+                    
+                    // 성공 메시지 (검색인 경우에만)
+                    if (searchQuery.trim()) {
+                        this.showSuccess(`"${searchQuery}" 검색 결과: ${result.data.total}건`);
+                    } else if (page === 1) {
+                        this.showSuccess(`질문서 목록을 불러왔습니다. (총 ${result.data.total}건)`);
+                    }
+
+                } catch (error) {
+                    console.error('질문서 목록 로드 실패:', error);
+                    this.showError(error.message || '질문서 목록을 불러오는데 실패했습니다.');
+                    
+                    // 오류 발생 시 빈 상태 표시
+                    this.renderQuestionsList({ questions: [], total: 0, page: 1, total_pages: 1 });
+                } finally {
+                    this.isLoading = false;
+                    this.showLoading(false);
+                }
+            }
+
+            // 로딩 상태 표시
+            showLoading(show) {
+                const loadingElement = document.getElementById('questionsLoading');
+                const gridElement = document.getElementById('questionsGrid');
+                const noDataElement = document.getElementById('noDataMessage');
+                
+                if (loadingElement) {
+                    loadingElement.style.display = show ? 'block' : 'none';
+                }
+                if (gridElement) {
+                    gridElement.style.display = show ? 'none' : 'grid';
+                }
+                if (noDataElement) {
+                    noDataElement.style.display = 'none';
+                }
+            }
+
+            // 에러 메시지 표시
+            showError(message) {
+                alert('오류: ' + message);
+            }
+
+            // 성공 메시지 표시
+            showSuccess(message) {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #10b981;
+                    color: white;
+                    padding: 1rem 1.5rem;
+                    border-radius: 10px;
+                    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+                    z-index: 10000;
+                    transform: translateX(100%);
+                    transition: transform 0.3s ease;
+                `;
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(100%)';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+
+        }
+
+        // 전역 변수
+        let questionsManager;
+
+        // 전역 함수들
+        function initQuestionsManager() {
+            questionsManager = new QuestionsManager();
+            console.log('질문서 관리자 초기화 완료');
+        }
+
+        function refreshQuestionsList() {
+            if (questionsManager) {
+                questionsManager.loadQuestionsList(questionsManager.currentPage, questionsManager.searchQuery);
+            }
+        }
+
+        function handleSearch(event) {
+            event.preventDefault();
+            const searchInput = document.getElementById('searchSchool');
+            const searchQuery = searchInput.value.trim();
+            
+            if (questionsManager) {
+                questionsManager.loadQuestionsList(1, searchQuery);
+            }
+        }
+
+        function resetSearch() {
+            document.getElementById('searchSchool').value = '';
+            if (questionsManager) {
+                questionsManager.loadQuestionsList(1, '');
+            }
+        }
+
+        function goToPage(page) {
+            if (questionsManager) {
+                questionsManager.loadQuestionsList(page, questionsManager.searchQuery);
+            }
+        }
+
+        function viewQuestionDetail(questionId) {
+            console.log('질문서 상세보기:', questionId);
+            // 실제 구현에서는 새 탭에서 질문서 페이지 열기
+            window.open(`https://silbo.kr/2014/_pages/php/downExcel/claim2.php?claimNum=${questionId}`, '_blank');
+        }
+
+        function downloadQuestion(questionId) {
+            console.log('질문서 다운로드:', questionId);
+            // 실제 구현에서는 다운로드 기능
+            if (questionsManager) {
+                questionsManager.showSuccess(`질문서 #${questionId} 다운로드를 시작합니다.`);
+            }
+        }
+
+        // 키보드 단축키
+        document.addEventListener('keydown', function(e) {
+            // Enter 키로 검색
+            if (e.target.id === 'searchSchool' && e.key === 'Enter') {
+                e.preventDefault();
+                handleSearch(e);
+            }
+            
+            // ESC 키로 검색 초기화
+            if (e.key === 'Escape' && document.getElementById('searchSchool').value) {
+                resetSearch();
+            }
+            
+            // F5 키로 새로고침
+            if (e.key === 'F5') {
+                e.preventDefault();
+                refreshQuestionsList();
+            }
+        });
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM이 완전히 로드된 후 초기화
+            setTimeout(() => {
+                initQuestionsManager();
+            }, 100);
+        });
+
+        // 백업 초기화 (DOM이 이미 로드된 경우)
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(() => {
+                    initQuestionsManager();
+                }, 100);
+            });
+        } else {
+            // 이미 로드 완료된 경우
+            setTimeout(() => {
+                initQuestionsManager();
+            }, 100);
+        }
+
+        // 반응형 처리
+        window.addEventListener('resize', function() {
+            // 창 크기 변경 시 레이아웃 조정
+            const container = document.querySelector('.container');
+            if (window.innerWidth < 768) {
+                container.style.padding = '10px';
+            } else {
+                container.style.padding = '20px';
+            }
+        });
+
+        // 스크롤 이벤트 (무한 스크롤 구현 시 사용)
+        window.addEventListener('scroll', function() {
+            // 무한 스크롤 기능이 필요한 경우 여기에 구현
+            const scrollPosition = window.innerHeight + window.scrollY;
+            const documentHeight = document.documentElement.offsetHeight;
+            
+            if (scrollPosition >= documentHeight - 1000) {
+                // 스크롤이 하단 근처에 도달했을 때 추가 데이터 로드
+                // loadMoreQuestions();
+            }
+        });
+
+        console.log('🎉 질문서 리스트 페이지가 완전히 로드되었습니다!');
+    </script>
+</body>
+</html>

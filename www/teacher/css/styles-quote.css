@@ -1,0 +1,1787 @@
+/* ===== 견적신청 페이지 전용 스타일 (styles-quote.css) ===== */
+/* 이 파일은 styles-base.css를 먼저 로드한 후 사용해야 합니다 */
+
+/* ===== 견적 페이지 타이틀 ===== */
+#quote-page .section-title {
+    background: var(--bg-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    letter-spacing: -0.025em;
+}
+
+#quote-page .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--bg-gradient);
+    border-radius: 2px;
+}
+
+/* ===== 컨테이너 ===== */
+#quote-page .container,
+.form-container,
+.guide-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* ===== 견적 폼 컨테이너 ===== */
+.quote-form-enhanced {
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-2xl);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-2xl);
+    border: 1px solid var(--gray-100);
+    position: relative;
+    overflow: hidden;
+}
+
+.quote-form-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--bg-gradient);
+}
+
+/* ===== 폼 섹션 ===== */
+.form-section {
+    border-bottom: 1px solid var(--gray-100);
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.form-section-header {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-section-header h4 {
+    color: var(--gray-800);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+}
+
+.form-section-header h4 i {
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--border-radius-lg);
+    background: var(--bg-gradient);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    box-shadow: var(--shadow-md);
+}
+
+/* ===== 폼 그리드 시스템 ===== */
+.form-grid-enhanced {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-xl);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-100);
+}
+
+.form-grid-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.form-grid-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-grid-item.form-grid-full {
+    grid-column: 1 / -1;
+}
+
+/* ===== 인라인 폼 행 스타일 ===== */
+.form-row-inline {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.form-row-inline .form-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+    min-width: 200px;
+}
+
+.form-row-inline .form-group label {
+    white-space: nowrap;
+    font-weight: 700;
+    color: var(--gray-700);
+    font-size: var(--font-size-sm);
+    margin: 0;
+    min-width: fit-content;
+}
+
+.form-row-inline .form-group input,
+.form-row-inline .form-group textarea {
+    flex: 1;
+}
+
+/* ===== 단일 행 스타일 (주소용) ===== */
+.form-row-single {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.form-row-single label {
+    white-space: nowrap;
+    font-weight: 700;
+    color: var(--gray-700);
+    font-size: var(--font-size-sm);
+    margin: 0;
+    min-width: 120px;
+}
+
+/* ===== 폼 필드 스타일 ===== */
+.form-group-enhanced {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-label-enhanced {
+    font-weight: 700;
+    color: var(--gray-700);
+    font-size: var(--font-size-sm);
+    margin: 0 0 0.75rem 0;
+    padding: 0 0.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.form-label-enhanced::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--bg-gradient);
+    transition: width 0.3s ease;
+    border-radius: 1px;
+}
+
+.form-grid-item:focus-within .form-label-enhanced::after {
+    width: 100%;
+}
+
+/* ===== 입력 필드 고급 스타일 ===== */
+.form-control-enhanced {
+    position: relative;
+    width: 100%;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius-xl);
+    padding: 1rem 1.25rem;
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--gray-800);
+    background: linear-gradient(135deg, var(--bg-primary), var(--gray-50));
+    background-clip: padding-box;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.04),
+        0 1px 3px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+.form-control-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--border-radius-xl);
+    padding: 2px;
+    background: linear-gradient(135deg, var(--gray-200), var(--gray-300));
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    pointer-events: none;
+    transition: var(--transition-base);
+}
+
+.form-control-enhanced:hover {
+    transform: translateY(-1px);
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border-color: var(--gray-300);
+}
+
+.form-control-enhanced:hover::before {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+.form-control-enhanced:focus {
+    transform: translateY(-2px);
+    border-color: var(--primary-color);
+    box-shadow: 
+        0 8px 24px rgba(102, 126, 234, 0.15),
+        0 4px 12px rgba(102, 126, 234, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    outline: none;
+    background: var(--bg-primary);
+}
+
+.form-control-enhanced:focus::before {
+    background: linear-gradient(135deg, var(--primary-color), var(--indigo-600));
+}
+
+.form-control-enhanced:disabled {
+    background: var(--gray-100);
+    color: var(--gray-500);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.form-control-enhanced::placeholder {
+    color: var(--gray-400);
+    font-weight: 400;
+    transition: var(--transition-base);
+}
+
+.form-control-enhanced:focus::placeholder {
+    color: var(--gray-300);
+    transform: translateY(-2px);
+}
+
+/* ===== 간소화된 입력 필드 ===== */
+.form-control-white {
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius-xl);
+    padding: 0.75rem 1rem;
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--gray-800);
+    background: var(--bg-primary);
+    transition: var(--transition-base);
+    box-shadow: var(--shadow-sm);
+}
+
+.form-control-white:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    outline: none;
+}
+
+.form-control-white:hover {
+    border-color: var(--gray-300);
+}
+
+/* ===== 텍스트에어리어 ===== */
+.textarea-enhanced {
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
+    line-height: 1.6;
+    padding: 1rem 1.25rem;
+}
+
+.textarea-full-height {
+    min-height: 140px;
+}
+
+/* ===== 유효성 검사 스타일 ===== */
+.form-control-enhanced.is-valid {
+    border-color: var(--green-500);
+    background: linear-gradient(135deg, var(--bg-primary), var(--green-50));
+}
+
+.form-control-enhanced.is-valid:focus {
+    box-shadow: 
+        0 8px 24px rgba(16, 185, 129, 0.15),
+        0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.form-control-enhanced.is-invalid {
+    border-color: var(--red-500);
+    background: linear-gradient(135deg, var(--bg-primary), var(--red-50));
+}
+
+.form-control-enhanced.is-invalid:focus {
+    box-shadow: 
+        0 8px 24px rgba(239, 68, 68, 0.15),
+        0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+/* ===== 아이콘 입력 필드 ===== */
+.form-input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.form-input-with-icon .input-icon {
+    position: absolute;
+    left: 1rem;
+    color: var(--gray-400);
+    font-size: var(--font-size-lg);
+    transition: var(--transition-base);
+    z-index: 2;
+}
+
+.form-input-with-icon .form-control-enhanced {
+    padding-left: 3rem;
+}
+
+.form-input-with-icon:focus-within .input-icon {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* ===== 필수 필드 표시 ===== */
+.required-asterisk {
+    color: var(--red-500);
+    margin-left: 0.25rem;
+    font-weight: 700;
+    font-size: 1.1em;
+    display: inline-block;
+    animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+@keyframes pulse-subtle {
+    0%, 100% { 
+        opacity: 1; 
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 0.7; 
+        transform: scale(1.05);
+    }
+}
+
+/* ===== 라디오 그룹 ===== */
+.radio-group-enhanced {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.form-check-enhanced {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--border-radius-xl);
+    transition: var(--transition-base);
+    cursor: pointer;
+    background: var(--bg-primary);
+    min-width: 120px;
+    justify-content: center;
+}
+
+.form-check-enhanced:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.form-check-enhanced:has(.form-check-input:checked) {
+    border-color: var(--primary-color);
+    background: var(--blue-50);
+    box-shadow: var(--shadow-md);
+    transform: scale(1.02);
+}
+
+.form-check-enhanced .form-check-input {
+    margin: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid var(--gray-300);
+    transition: var(--transition-base);
+}
+
+.form-check-enhanced .form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.form-check-enhanced .form-check-label {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    margin: 0;
+    cursor: pointer;
+    color: var(--gray-700);
+}
+
+/* ===== 테이블 스타일 ===== */
+.table-enhanced {
+    border: none;
+    border-radius: var(--border-radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: var(--bg-primary);
+}
+
+.table-enhanced th {
+    background: var(--bg-gradient);
+    color: white;
+    font-weight: 700;
+    border: none;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.025em;
+}
+
+.table-enhanced td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--gray-100);
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 500;
+}
+
+.table-enhanced tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.table-enhanced tbody tr:hover {
+    background: var(--gray-50);
+    transform: translateX(2px);
+}
+
+/* ===== 참여인원 테이블 ===== */
+.participants-table {
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: none;
+}
+
+.participants-table thead th {
+    background: linear-gradient(135deg, var(--indigo-500), var(--indigo-600));
+    color: white;
+    font-weight: 700;
+    padding: 1.25rem 0.75rem;
+    font-size: var(--font-size-sm);
+}
+
+.participants-table tbody tr:nth-child(even) {
+    background: var(--gray-50);
+}
+
+.participants-table tbody tr {
+    transition: var(--transition-base);
+}
+
+/* 수정된 부분: td 오른쪽 정렬 및 패딩 제거 */
+.participants-table tbody td {
+    text-align: right;
+    padding: 0; /* 패딩 제거 */
+    border-bottom: 1px solid var(--gray-100);
+    vertical-align: middle;
+    font-weight: 500;
+}
+
+.participants-table .week-input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    gap: 0.5rem;
+    padding: 0.5rem; /* wrapper에만 최소 패딩 */
+}
+
+/* 수정된 부분: input 테두리를 흰색으로 */
+.participants-table .week-input {
+    width: 4rem;
+    text-align: right;
+    border: 1px solid white; /* 테두리를 흰색으로 변경 */
+    border-radius: var(--border-radius-lg);
+    padding: 0.5rem;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    transition: var(--transition-base);
+    background: var(--bg-primary);
+}
+
+.participants-table .week-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    outline: none;
+}
+
+.participants-table .unit-label {
+    font-size: var(--font-size-sm);
+    color: var(--gray-600);
+    font-weight: 500;
+}
+
+.participants-table tfoot th {
+    background: var(--gray-800);
+    color: white;
+    font-weight: 700;
+    padding: 1rem;
+    font-size: var(--font-size-base);
+    text-align: center; /* footer는 중앙 정렬 유지 */
+}
+
+.total-participants {
+    font-weight: 800;
+    color: var(--primary-color);
+    font-size: var(--font-size-xl);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== 폼 테이블 스타일 ===== */
+.form-table-enhanced {
+    border: none;
+    margin-bottom: 0;
+}
+
+.form-table-enhanced td {
+    border: none;
+    padding: 0.75rem 1rem;
+    vertical-align: middle;
+}
+
+.form-table-enhanced .label-cell {
+    width: 15%;
+    min-width: 120px;
+    white-space: nowrap;
+    background: var(--gray-50);
+    border-right: 1px solid var(--gray-200);
+    font-weight: 600;
+}
+
+.form-table-enhanced .input-cell {
+    background: var(--bg-primary);
+}
+
+.form-table-enhanced tr:not(:last-child) td {
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.form-table-enhanced .form-control-enhanced {
+    margin: 0;
+    width: 100%;
+}
+
+/* ===== 제출 버튼 ===== */
+.submit-section {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--gray-100);
+}
+
+.btn-submit-enhanced {
+    background: var(--bg-gradient);
+    border: none;
+    color: white;
+    padding: 1rem 3rem;
+    border-radius: var(--border-radius-2xl);
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-base);
+    box-shadow: var(--shadow-xl);
+    position: relative;
+    overflow: hidden;
+    min-width: 200px;
+}
+
+.btn-submit-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-submit-enhanced:hover::before {
+    left: 100%;
+}
+
+.btn-submit-enhanced:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-2xl);
+}
+
+.btn-submit-enhanced:active {
+    transform: translateY(-1px);
+}
+
+.btn-submit-enhanced:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-submit-enhanced .fas.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ===== 알림 메시지 ===== */
+.alert-enhanced {
+    background: var(--bg-lighter);
+    border: 2px solid var(--bootstrap-primary);
+    border-radius: var(--border-radius-2xl);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.alert-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--bg-gradient);
+}
+
+.alert-heading-enhanced {
+    color: var(--bootstrap-primary);
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.alert-heading-enhanced i {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: var(--bootstrap-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+}
+
+/* ===== 성공/에러 메시지 ===== */
+.success-message {
+    background: linear-gradient(135deg, var(--green-50), var(--green-100));
+    border: 2px solid var(--green-500);
+    border-radius: var(--border-radius-2xl);
+    padding: 1.5rem;
+    margin: 1rem 0;
+    text-align: center;
+    animation: slideInFromTop 0.5s ease-out;
+}
+
+.success-message i {
+    color: var(--green-600);
+    font-size: var(--font-size-2xl);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.success-message h4 {
+    color: var(--green-700);
+    margin: 0.5rem 0;
+    font-weight: 700;
+}
+
+.success-message p {
+    color: var(--green-600);
+    margin: 0;
+}
+
+.error-message {
+    background: linear-gradient(135deg, var(--red-50), var(--red-100));
+    border: 2px solid var(--red-500);
+    border-radius: var(--border-radius-2xl);
+    padding: 1.5rem;
+    margin: 1rem 0;
+    text-align: center;
+    animation: shake 0.5s ease-in-out;
+}
+
+.error-message i {
+    color: var(--red-600);
+    font-size: var(--font-size-2xl);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.error-message h4 {
+    color: var(--red-700);
+    margin: 0.5rem 0;
+    font-weight: 700;
+}
+
+.error-message p {
+    color: var(--red-600);
+    margin: 0;
+}
+
+/* ===== 애니메이션 ===== */
+@keyframes slideInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* ===== 프로그레스 인디케이터 ===== */
+.form-progress {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    position: relative;
+}
+
+.progress-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    left: 60%;
+    width: 80%;
+    height: 2px;
+    background: var(--gray-200);
+    z-index: 1;
+}
+
+.progress-step.completed:not(:last-child)::after {
+    background: var(--primary-color);
+}
+
+.progress-number {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--gray-200);
+    color: var(--gray-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 2;
+    transition: var(--transition-base);
+}
+
+.progress-step.completed .progress-number {
+    background: var(--primary-color);
+    color: white;
+}
+
+.progress-step.active .progress-number {
+    background: var(--amber-500);
+    color: white;
+    animation: pulse 1.5s infinite;
+}
+
+.progress-label {
+    font-size: var(--font-size-xs);
+    color: var(--gray-600);
+    text-align: center;
+    font-weight: 500;
+}
+
+.progress-step.completed .progress-label {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+    }
+}
+
+/* ===== 툴팁 ===== */
+.tooltip-enhanced {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-enhanced .tooltip-text {
+    visibility: hidden;
+    background: var(--gray-800);
+    color: white;
+    text-align: center;
+    border-radius: var(--border-radius-lg);
+    padding: 0.5rem 0.75rem;
+    position: absolute;
+    z-index: var(--z-tooltip);
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    width: 120px;
+    font-size: var(--font-size-xs);
+    opacity: 0;
+    transition: var(--transition-base);
+}
+
+.tooltip-enhanced .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--gray-800) transparent transparent transparent;
+}
+
+.tooltip-enhanced:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* ===== 로딩 및 상태 ===== */
+.form-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.form-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(2px);
+    border-radius: var(--border-radius-2xl);
+    z-index: 10;
+}
+
+/* ===== 페이드 인 애니메이션 ===== */
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-section:nth-child(1) { animation-delay: 0.1s; }
+.form-section:nth-child(2) { animation-delay: 0.2s; }
+.form-section:nth-child(3) { animation-delay: 0.3s; }
+.form-section:nth-child(4) { animation-delay: 0.4s; }
+.form-section:nth-child(5) { animation-delay: 0.5s; }
+
+/* ===== 반응형 디자인 ===== */
+
+/* 데스크톱 및 대형 태블릿 */
+@media (max-width: 1200px) {
+    .form-container,
+    .guide-section {
+        padding: 0 2rem;
+    }
+    
+    .quote-form-enhanced {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .quote-form-enhanced {
+        padding: 2rem;
+        margin: 1rem;
+    }
+    
+    .form-section-header h4 {
+        font-size: var(--font-size-lg);
+    }
+    
+    .participants-table .week-input {
+        width: 3.5rem;
+    }
+    
+    .form-grid-enhanced .form-control-enhanced {
+        padding: 0.875rem 1.125rem;
+        font-size: var(--font-size-sm);
+    }
+    
+    .form-grid-enhanced .textarea-enhanced {
+        min-height: 110px;
+        padding: 0.875rem 1.125rem;
+    }
+    
+    .form-grid-enhanced .textarea-full-height {
+        min-height: 130px;
+    }
+    
+    .form-input-with-icon .form-control-enhanced {
+        padding-left: 2.75rem;
+    }
+    
+    .form-input-with-icon .input-icon {
+        left: 0.875rem;
+        font-size: var(--font-size-base);
+    }
+}
+
+@media (max-width: 992px) {
+    .form-container,
+    .guide-section {
+        padding: 0 1.5rem;
+    }
+    
+    .quote-form-enhanced {
+        padding: 1.5rem;
+    }
+    
+    .participants-table .week-input {
+        width: 3.5rem;
+        padding: 0.4rem;
+        font-size: 0.8rem;
+    }
+    
+    .participants-table thead th,
+    .participants-table tfoot th {
+        padding: 1rem 0.5rem;
+        font-size: 0.85rem;
+    }
+    
+    .table-enhanced th,
+    .table-enhanced td {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* 태블릿 */
+@media (max-width: 768px) {
+    #quote-page .section-title {
+        font-size: var(--font-size-2xl);
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-progress {
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+    }
+    
+    .progress-label {
+        font-size: 0.65rem;
+    }
+    
+    .progress-number {
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 0.75rem;
+    }
+    
+    .progress-step:not(:last-child)::after {
+        top: 0.75rem;
+    }
+    
+    .form-container,
+    .guide-section {
+        padding: 0 1rem;
+    }
+    
+    .quote-form-enhanced {
+        padding: 1.25rem;
+        border-radius: var(--border-radius-xl);
+    }
+    
+    .form-section {
+        padding-bottom: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-section-header h4 {
+        font-size: var(--font-size-lg);
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .form-section-header h4 i {
+        width: 1.75rem;
+        height: 1.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .form-grid-enhanced {
+        padding: 1.25rem;
+        gap: 1.25rem;
+    }
+    
+    .form-grid-row {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+    
+    .form-grid-item.form-grid-full {
+        grid-column: 1;
+    }
+    
+    .form-row-inline {
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .form-row-inline .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+        min-width: 100%;
+        gap: 0.5rem;
+    }
+
+    .form-row-inline .form-group label {
+        margin-bottom: 0;
+        font-size: var(--font-size-sm);
+    }
+
+    .form-row-single {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .form-row-single label {
+        min-width: auto;
+        margin-bottom: 0;
+        font-size: var(--font-size-sm);
+    }
+    
+    .radio-group-enhanced {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .form-check-enhanced {
+        min-width: auto;
+        justify-content: flex-start;
+        padding: 0.75rem 1rem;
+    }
+    
+    .form-grid-enhanced .form-control-enhanced {
+        padding: 0.875rem 1rem;
+        font-size: var(--font-size-base);
+        border-radius: var(--border-radius-lg);
+        box-shadow: 
+            0 2px 8px rgba(0, 0, 0, 0.06),
+            0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+    
+    .form-grid-enhanced .form-control-enhanced:hover {
+        transform: none;
+        box-shadow: 
+            0 3px 12px rgba(0, 0, 0, 0.08),
+            0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-grid-enhanced .form-control-enhanced:focus {
+        transform: none;
+        box-shadow: 
+            0 4px 16px rgba(102, 126, 234, 0.12),
+            0 2px 8px rgba(102, 126, 234, 0.15);
+    }
+    
+    .form-grid-enhanced .textarea-enhanced {
+        min-height: 100px;
+        padding: 0.875rem 1rem;
+    }
+    
+    .form-grid-enhanced .textarea-full-height {
+        min-height: 120px;
+    }
+    
+    .form-input-with-icon .form-control-enhanced {
+        padding-left: 2.5rem;
+    }
+    
+    .form-input-with-icon .input-icon {
+        left: 0.75rem;
+        font-size: var(--font-size-base);
+    }
+    
+    .form-grid-enhanced .form-label-enhanced {
+        font-size: var(--font-size-xs);
+        margin-bottom: 0.5rem;
+        padding: 0 0.25rem;
+    }
+    
+    .form-grid-enhanced .form-label-enhanced::after {
+        height: 1.5px;
+    }
+    
+    .btn-submit-enhanced {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        font-size: var(--font-size-base);
+    }
+    
+    /* 테이블 모바일 최적화 */
+    .table-responsive {
+        border-radius: var(--border-radius-xl);
+        overflow: hidden;
+    }
+    
+    .table-enhanced,
+    .participants-table {
+        font-size: 0.85rem;
+    }
+    
+    .participants-table .week-input {
+        width: 3rem;
+        padding: 0.35rem;
+        font-size: 0.75rem;
+    }
+    
+    .participants-table .unit-label {
+        font-size: 0.75rem;
+    }
+    
+    .participants-table thead th,
+    .participants-table tfoot th {
+        padding: 0.75rem 0.25rem;
+        font-size: 0.8rem;
+    }
+    
+    .participants-table tbody td {
+        padding: 0.5rem 0.25rem;
+    }
+}
+
+/* 모바일 */
+@media (max-width: 576px) {
+    #quote-page .section-title {
+        font-size: var(--font-size-xl);
+        margin-bottom: 1rem;
+    }
+    
+    .form-container,
+    .guide-section {
+        padding: 0 0.75rem;
+    }
+    
+    .quote-form-enhanced {
+        padding: 1rem;
+        margin: 0;
+        border-radius: var(--border-radius-lg);
+    }
+    
+    .alert-enhanced {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: var(--border-radius-lg);
+    }
+    
+    .alert-heading-enhanced {
+        font-size: var(--font-size-base);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .form-section {
+        padding-bottom: 1.25rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .form-section-header h4 {
+        font-size: var(--font-size-base);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        text-align: left;
+    }
+    
+    .form-section-header h4 small {
+        font-size: 0.8rem;
+        margin-left: 0;
+    }
+    
+    .form-section-header h4 i {
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .form-grid-enhanced {
+        padding: 1rem;
+        gap: 1rem;
+        border-radius: var(--border-radius-lg);
+    }
+    
+    .form-grid-enhanced .form-control-enhanced {
+        padding: 0.75rem;
+        font-size: var(--font-size-sm);
+        border-radius: var(--border-radius-lg);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-grid-enhanced .form-control-enhanced:hover {
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    }
+    
+    .form-grid-enhanced .form-control-enhanced:focus {
+        box-shadow: 0 3px 12px rgba(102, 126, 234, 0.15);
+    }
+    
+    .form-control-white {
+        padding: 0.75rem;
+        font-size: var(--font-size-sm);
+        border-radius: var(--border-radius-lg);
+    }
+    
+    .form-control-white[type="date"] {
+        padding: 0.65rem;
+    }
+    
+    .form-grid-enhanced .textarea-enhanced {
+        min-height: 90px;
+        padding: 0.75rem 0.875rem;
+    }
+    
+    .form-grid-enhanced .textarea-full-height {
+        min-height: 110px;
+    }
+    
+    .form-input-with-icon .form-control-enhanced {
+        padding-left: 2.25rem;
+    }
+    
+    .form-input-with-icon .input-icon {
+        left: 0.625rem;
+        font-size: var(--font-size-sm);
+    }
+    
+    .form-grid-enhanced .form-label-enhanced {
+        font-size: 0.8rem;
+        margin-bottom: 0.4rem;
+    }
+    
+    .required-asterisk {
+        animation: none;
+        font-size: 1em;
+    }
+    
+    /* 모바일 테이블 스택 레이아웃 */
+    .participants-table {
+        display: block;
+        background: transparent;
+        box-shadow: none;
+    }
+    
+    .participants-table thead {
+        display: none;
+    }
+    
+    .participants-table tbody {
+        display: block;
+    }
+    
+    .participants-table tbody tr {
+        display: block;
+        background: var(--bg-primary);
+        border: 2px solid var(--gray-200);
+        border-radius: var(--border-radius-lg);
+        margin-bottom: 0.75rem;
+        padding: 1rem;
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .participants-table tbody td {
+        display: block;
+        border: none;
+        padding: 0.5rem 0;
+        text-align: left;
+        position: relative;
+        padding-left: 35%;
+    }
+    
+    .participants-table tbody td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 30%;
+        font-weight: 700;
+        color: var(--gray-700);
+        font-size: var(--font-size-xs);
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .participants-table .week-input-wrapper {
+        justify-content: flex-start;
+    }
+    
+    .participants-table .week-input {
+        width: 4rem;
+        padding: 0.5rem;
+        font-size: var(--font-size-sm);
+    }
+    
+    .participants-table tfoot {
+        display: block;
+        margin-top: 1rem;
+    }
+    
+    .participants-table tfoot tr {
+        display: block;
+        background: var(--gray-800);
+        border-radius: var(--border-radius-lg);
+        padding: 1rem;
+    }
+    
+    .participants-table tfoot th {
+        display: block;
+        border: none;
+        padding: 0;
+        text-align: center;
+        color: white;
+    }
+    
+    .participants-table tfoot th:nth-child(1) {
+        margin-bottom: 0.5rem;
+        font-size: var(--font-size-sm);
+    }
+    
+    .total-participants {
+        font-size: var(--font-size-lg);
+        color: var(--amber-500);
+    }
+    
+    /* 보험 플랜 테이블 모바일 */
+    .table-enhanced {
+        display: block;
+        background: transparent;
+        box-shadow: none;
+    }
+    
+    .table-enhanced thead {
+        display: block;
+        margin-bottom: 1rem;
+    }
+    
+    .table-enhanced thead tr {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        background: var(--bg-primary);
+        padding: 1rem;
+        border-radius: var(--border-radius-lg);
+        border: 2px solid var(--primary-color);
+    }
+    
+    .table-enhanced thead th {
+        display: flex;
+        background: transparent;
+        color: var(--gray-800);
+        padding: 0;
+        border: none;
+    }
+    
+    .table-enhanced thead th:first-child {
+        display: none;
+    }
+    
+    .table-enhanced tbody {
+        display: block;
+    }
+    
+    .table-enhanced tbody tr {
+        display: block;
+        background: var(--bg-primary);
+        border: 2px solid var(--gray-200);
+        border-radius: var(--border-radius-lg);
+        margin-bottom: 1rem;
+        padding: 1rem;
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .table-enhanced tbody td {
+        display: block;
+        border: none;
+        padding: 0.5rem 0;
+        text-align: left;
+        position: relative;
+        padding-left: 35%;
+    }
+    
+    .table-enhanced tbody td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 30%;
+        font-weight: 700;
+        color: var(--gray-700);
+        font-size: var(--font-size-xs);
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .table-enhanced tbody td:first-child:before {
+        content: "보장내용";
+    }
+    
+    .table-enhanced tbody td:nth-child(2):before {
+        content: "PLAN A";
+    }
+    
+    .table-enhanced tbody td:nth-child(3):before {
+        content: "PLAN B";
+    }
+    
+    /* 모바일 폼 테이블 */
+    .form-table-enhanced {
+        display: block;
+        width: 100%;
+    }
+    
+    .form-table-enhanced tbody {
+        display: block;
+    }
+    
+    .form-table-enhanced tr {
+        display: block;
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+    }
+    
+    .form-table-enhanced td {
+        display: block;
+        width: 100%;
+        border: none;
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .form-table-enhanced .label-cell {
+        width: 100%;
+        background: var(--gray-100);
+        border-right: none;
+        border-bottom: 1px solid var(--gray-200);
+        font-weight: 700;
+        color: var(--gray-800);
+    }
+    
+    .form-table-enhanced .input-cell {
+        background: var(--bg-primary);
+        padding-top: 0.5rem;
+    }
+    
+    .form-table-enhanced tr:not(:last-child) td {
+        border-bottom: none;
+    }
+}
+
+/* 초소형 모바일 */
+@media (max-width: 480px) {
+    #quote-page .section-title {
+        font-size: var(--font-size-xl);
+    }
+    
+    .form-progress {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .progress-step {
+        flex: none;
+        width: calc(25% - 0.375rem);
+    }
+    
+    .progress-step:not(:last-child)::after {
+        display: none;
+    }
+    
+    .quote-form-enhanced {
+        padding: 1rem;
+        margin: 0.25rem;
+    }
+    
+    .alert-enhanced {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-grid-enhanced {
+        padding: 0.75rem;
+        gap: 1rem;
+        border-radius: var(--border-radius-lg);
+    }
+    
+    .form-grid-row {
+        gap: 1rem;
+    }
+    
+    .participants-table .week-input {
+        width: 2.5rem;
+        font-size: var(--font-size-xs);
+    }
+    
+    .form-table-enhanced .label-cell,
+    .form-table-enhanced .input-cell {
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .form-container,
+    .guide-section {
+        padding: 0 0.5rem;
+    }
+    
+    .quote-form-enhanced {
+        padding: 0.75rem;
+    }
+    
+    .form-grid-enhanced {
+        padding: 0.75rem;
+        gap: 0.75rem;
+    }
+    
+    .participants-table .week-input {
+        width: 3.5rem;
+        padding: 0.4rem;
+        font-size: 0.75rem;
+    }
+    
+    .btn-submit-enhanced {
+        padding: 0.875rem 1rem;
+        font-size: var(--font-size-sm);
+    }
+}
+
+/* ===== 접근성 및 성능 최적화 ===== */
+@media (prefers-reduced-motion: reduce) {
+    .form-grid-enhanced .form-control-enhanced {
+        transition: none;
+    }
+    
+    .form-grid-enhanced .form-control-enhanced:hover,
+    .form-grid-enhanced .form-control-enhanced:focus {
+        transform: none;
+    }
+    
+    .form-grid-enhanced .form-label-enhanced::after {
+        transition: none;
+    }
+    
+    .required-asterisk {
+        animation: none;
+    }
+    
+    .form-grid-enhanced .form-control-enhanced:focus::placeholder {
+        transform: none;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .form-grid-enhanced .form-control-enhanced {
+        background: linear-gradient(135deg, var(--gray-800), var(--gray-700));
+        color: var(--gray-100);
+        border-color: var(--gray-600);
+    }
+    
+    .form-grid-enhanced .form-control-enhanced::placeholder {
+        color: var(--gray-400);
+    }
+    
+    .form-grid-enhanced .form-control-enhanced:focus {
+        background: var(--gray-800);
+        border-color: var(--primary-color);
+    }
+}
+
+@media (prefers-contrast: high) {
+    .form-grid-enhanced .form-control-enhanced {
+        border: 3px solid var(--gray-800);
+        background: white;
+    }
+    
+    .form-grid-enhanced .form-control-enhanced:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px var(--primary-color);
+    }
+}
+
+@media (pointer: coarse) {
+    .form-grid-enhanced .form-control-enhanced {
+        min-height: 48px;
+        padding: 0.875rem 1rem;
+    }
+    
+    .form-input-with-icon .input-icon {
+        font-size: var(--font-size-lg);
+    }
+}
+
+@media print {
+    .form-grid-enhanced .form-control-enhanced {
+        background: white !important;
+        border: 1px solid var(--gray-400) !important;
+        box-shadow: none !important;
+        transform: none !important;
+    }
+    
+    .form-grid-enhanced .form-label-enhanced::after {
+        display: none;
+    }
+    
+    .required-asterisk {
+        animation: none;
+    }
+}
+
+/* ===== 반응형 수정 ===== */
+@media (max-width: 992px) {
+    .participants-table .week-input {
+        width: 3.5rem;
+        padding: 0.4rem;
+        font-size: 0.8rem;
+        border: 1px solid white; /* 반응형에서도 흰색 테두리 유지 */
+    }
+    
+    .participants-table .week-input-wrapper {
+        padding: 0.4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .participants-table .week-input {
+        width: 3.5rem;
+        padding: 0.4rem;
+        font-size: 0.8rem;
+        border: 1px solid white;
+    }
+    
+    .participants-table tbody td {
+        padding: 0;
+        text-align: right;
+    }
+    
+    .participants-table .week-input-wrapper {
+        justify-content: flex-end;
+        padding: 0.4rem;
+    }
+}
+
+@media (max-width: 576px) {
+    /* 모바일에서는 스택 레이아웃이므로 별도 처리 */
+    .participants-table tbody td {
+        text-align: left;
+        padding: 0.5rem 0;
+        padding-left: 35%;
+    }
+    
+    .participants-table .week-input-wrapper {
+        justify-content: flex-start;
+        padding: 0;
+    }
+    
+    .participants-table .week-input {
+        width: 4rem;
+        padding: 0.5rem;
+        font-size: var(--font-size-sm);
+        border: 1px solid white;
+    }
+}
+
+@media (max-width: 480px) {
+    .participants-table .week-input {
+        width: 2.5rem;
+        font-size: var(--font-size-xs);
+        border: 1px solid white;
+    }
+}
+
+@media (max-width: 400px) {
+    .participants-table .week-input {
+        width: 3.5rem;
+        padding: 0.4rem;
+        font-size: 0.75rem;
+        border: 1px solid white;
+    }
+}

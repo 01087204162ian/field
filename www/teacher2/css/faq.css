@@ -1,0 +1,528 @@
+/* === 메인 컨테이너 === */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* === 헤더 섹션 === */
+        .faq-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faq-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .faq-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .faq-subtitle {
+            font-size: 1.1rem;
+            color: #718096;
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* === 아코디언 컨테이너 === */
+        .accordion-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .accordion {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .accordion-item {
+            border: none;
+            margin-bottom: 1rem;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .accordion-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .accordion-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .accordion-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .accordion-button {
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 1.5rem 2rem;
+            background: white;
+            border: none;
+            color: #2d3748;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .accordion-button::before {
+            content: '';
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .accordion-button[data-question="Q1"]::before { content: '1'; }
+        .accordion-button[data-question="Q2"]::before { content: '2'; }
+        .accordion-button[data-question="Q3"]::before { content: '3'; }
+        .accordion-button[data-question="Q4"]::before { content: '4'; }
+        .accordion-button[data-question="Q5"]::before { content: '5'; }
+        .accordion-button[data-question="Q6"]::before { content: '6'; }
+        .accordion-button[data-question="Q7"]::before { content: '7'; }
+        .accordion-button[data-question="Q8"]::before { content: '8'; }
+        .accordion-button[data-question="Q9"]::before { content: '9'; }
+        
+        .accordion-button:not(.collapsed) {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #667eea;
+            box-shadow: none;
+        }
+        
+        .accordion-button:hover {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            transform: translateX(5px);
+        }
+        
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.15);
+            border-color: transparent;
+        }
+        
+        .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23667eea'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+            transition: transform 0.3s ease;
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        
+        .accordion-button:not(.collapsed)::after {
+            transform: rotate(-180deg);
+        }
+        
+        .accordion-body {
+            padding: 2rem;
+            background: #fafbfc;
+            line-height: 1.7;
+            color: #4a5568;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .accordion-body p {
+            margin-bottom: 1rem;
+        }
+
+        .accordion-body p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .accordion-body strong {
+            color: #2d3748;
+            font-weight: 700;
+        }
+        
+        .text-primary {
+            color: #667eea !important;
+            font-weight: 600;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #667eea;
+            position: relative;
+        }
+
+        .highlight::before {
+            content: '💡';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .highlight p {
+            margin-bottom: 0.75rem;
+        }
+
+        .highlight p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .highlight ul {
+            margin-bottom: 0;
+            padding-left: 1.5rem;
+        }
+        
+        ul {
+            margin: 1rem 0;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        li::marker {
+            color: #667eea;
+        }
+
+        /* === 플로팅 도움말 버튼 === */
+        .floating-help-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floating-help-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+        }
+
+        /* === 검색 기능 === */
+        .search-container {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 1rem;
+            background: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #718096;
+            font-size: 1.1rem;
+        }
+
+        /* === 태그 스타일 === */
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        /* === 애니메이션 === */
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-in {
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* === 반응형 디자인 === */
+        @media (max-width: 1200px) {
+            .main-container {
+                padding: 1.5rem;
+            }
+
+            .accordion-container {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+            }
+
+            .faq-header {
+                padding: 2rem 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .faq-title {
+                font-size: 2rem;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .faq-subtitle {
+                font-size: 1rem;
+            }
+
+            .accordion-container {
+                padding: 1.5rem;
+            }
+
+            .accordion-button {
+                font-size: 1rem;
+                padding: 1.25rem 1.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+                text-align: left;
+            }
+
+            .accordion-button::before {
+                width: 20px;
+                height: 20px;
+                font-size: 0.75rem;
+            }
+
+            .accordion-body {
+                padding: 1.5rem;
+            }
+
+            .highlight {
+                padding: 1.25rem;
+                margin: 1rem 0;
+            }
+
+            .floating-help-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.25rem;
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-container {
+                padding: 0.75rem;
+            }
+
+            .faq-header {
+                padding: 1.5rem 1rem;
+            }
+
+            .faq-title {
+                font-size: 1.75rem;
+            }
+
+            .accordion-container {
+                padding: 1rem;
+            }
+
+            .accordion-button {
+                font-size: 0.95rem;
+                padding: 1rem;
+            }
+
+            .accordion-body {
+                padding: 1.25rem;
+                font-size: 0.95rem;
+            }
+
+            .highlight {
+                padding: 1rem;
+            }
+
+            .search-input {
+                padding: 0.875rem 0.875rem 0.875rem 2.5rem;
+                font-size: 0.95rem;
+            }
+
+            .search-icon {
+                left: 0.875rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .faq-title {
+                font-size: 1.5rem;
+            }
+
+            .accordion-button {
+                font-size: 0.9rem;
+                padding: 0.875rem;
+            }
+
+            .accordion-body {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+
+            li {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* === 접근성 개선 === */
+        .accordion-button:focus-visible {
+            outline: 2px solid #667eea;
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* === 다크모드 지원 === */
+        @media (prefers-color-scheme: dark) {
+            .faq-header,
+            .accordion-container {
+                background: rgba(45, 55, 72, 0.95);
+                color: #e2e8f0;
+            }
+
+            .accordion-item {
+                background: #2d3748;
+            }
+
+            .accordion-button {
+                background: #2d3748;
+                color: #e2e8f0;
+            }
+
+            .accordion-body {
+                background: #1a202c;
+                color: #cbd5e0;
+            }
+        }
+
+        /* === 로딩 상태 === */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(102, 126, 234, 0.3);
+            border-radius: 50%;
+            border-top-color: #667eea;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }

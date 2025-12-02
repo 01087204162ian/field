@@ -1,0 +1,28 @@
+/secure_check/
+├── index.php              # 로그인 후 대시보드
+├── login.php              # 관리자 로그인 화면
+├── dashboard.php          # 점검표 목록 및 입력
+├── save_result.php        # 점검결과 저장 처리
+├── /css/
+│   └── style.css
+├── /js/
+│   └── app.js
+├── /includes/
+│   ├── db.php             # DB 연결
+│   └── auth.php           # 로그인 인증
+└── /data/
+    └── init.sql           # 초기 테이블 구조
+    
+   CREATE TABLE admin_users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL  -- bcrypt 해시 저장
+); 
+    1. 로그인 페이지 (login.php)
+   └─ 사용자 인증 후 세션 시작
+        ↓
+2. 대시보드 페이지 (dashboard.php)
+   └─ 세션 확인 후 점검표 표시 및 입력 가능
+        ↓
+3. 결과 저장 (save_result.php)
+   └─ 세션 유지한 상태에서만 접근 허용
