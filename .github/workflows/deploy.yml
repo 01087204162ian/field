@@ -24,4 +24,3 @@ jobs:
           local-dir: ./www
           server-dir: /field0327/www
           log-level: standard
-
