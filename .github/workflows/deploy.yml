@@ -20,6 +20,6 @@ jobs:
         run: |
           lftp -c "
           open -u field0327,${{ secrets.FTP_PASSWORD }} silbo.kr;
-          mirror -R --verbose --delete ./www /www;
+          mirror -R --verbose ./www www;
           bye
           "
