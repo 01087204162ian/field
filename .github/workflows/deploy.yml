@@ -21,7 +21,8 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           protocol: ftp
-          local-dir: ./www
+          local-dir: ./www/          # ← 슬래시 추가
           server-dir: ${{ secrets.FTP_REMOTE_DIR }}
           log-level: standard
+
 
