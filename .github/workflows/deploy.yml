@@ -22,5 +22,5 @@ jobs:
           port: ${{ secrets.SFTP_PORT }}
           sftp_only: true
           local_path: "./www/"
-          remote_path: "/www/"  # 상대 경로로 (홈 디렉토리 기준)
+          remote_path: "/field0327/www/"  # 상대 경로로 (홈 디렉토리 기준)
           delete_remote_files: false
