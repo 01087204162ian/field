@@ -27,6 +27,6 @@ jobs:
           # 원격: Xftp에서 보는 /field0327/www 바로 여기에 업로드
           remote_path: "/field0327/www/"
 
-          # 파일 권한 동기화 옵션들
+          # 파일 권한 동기화 옵션들dd
           delete_remote_files: false
           sftp_only: true
