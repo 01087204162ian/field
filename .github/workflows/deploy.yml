@@ -21,5 +21,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           local-dir: ./www/
-          server-dir: /www/
+          server-dir: ./www/  # FTP 루트의 www 폴더
           dangerous-clean-slate: false
