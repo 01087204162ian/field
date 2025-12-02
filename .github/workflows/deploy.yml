@@ -13,13 +13,13 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v3
 
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
       - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: silbo.kr
-          username: field0327
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: 21
-          local-dir: ./www/
-          server-dir: ./www/  # FTP 루트의 www 폴더
-          dangerous-clean-slate: false
+        run: |
+          lftp -c "
+          open -u field0327,${{ secrets.FTP_PASSWORD }} silbo.kr;
+          mirror -R --verbose --delete ./www /www;
+          bye
+          "
