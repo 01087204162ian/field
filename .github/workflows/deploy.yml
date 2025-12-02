@@ -21,7 +21,9 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: "ftp"
           port: 21
+          # 로컬: D:\field\www 아래 내용만 업로드
           local-dir: "www/"
-          server-dir: "www/"
+          # 원격: 실제 웹 루트 = /field0327/www/
+          server-dir: "/field0327/www/"
           dangerous-clean-slate: false
           security: "loose"
